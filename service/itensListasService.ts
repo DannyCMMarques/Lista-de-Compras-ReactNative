@@ -28,26 +28,23 @@ export const adicionarItemNaLista = async (
         quantidade: item.quantidade,
         categoria: item.categoria || '',
         unidade: item.unidade || '',
-        comprado: false, 
+        comprado: false,
         createdAt: serverTimestamp(),
     });
 };
+
+const parseItem = (doc: any): ItensListaResponse => ({
+    id: doc.id,
+    ...doc.data(),
+    createdAt: doc.data().createdAt?.toDate(),
+});
 
 export const listarItensDaLista = async (
     listaId: string
 ): Promise<ItensListaResponse[]> => {
     const itensRef = collection(db, collectionName, listaId, 'itens');
     const snapshot = await getDocs(itensRef);
-
-    return snapshot.docs.map((doc) => ({
-        id: doc.id,
-        nome: doc.data().nome,
-        quantidade: doc.data().quantidade,
-        categoria: doc.data().categoria,
-        unidade: doc.data().unidade,
-        comprado: doc.data().comprado,
-        createdAt: doc.data().createdAt?.toDate(),
-    }));
+    return snapshot.docs.map(parseItem);
 };
 
 export const deletarItemDaLista = async (
@@ -65,16 +62,7 @@ export const listarItensPorCategoria = async (
     const itensRef = collection(db, collectionName, listaId, 'itens');
     const q = query(itensRef, where('categoria', '==', categoria));
     const snapshot = await getDocs(q);
-
-    return snapshot.docs.map((doc) => ({
-        id: doc.id,
-        nome: doc.data().nome,
-        quantidade: doc.data().quantidade,
-        categoria: doc.data().categoria,
-        unidade: doc.data().unidade,
-        comprado: doc.data().comprado,
-        createdAt: doc.data().createdAt?.toDate(),
-    }));
+    return snapshot.docs.map(parseItem);
 };
 
 export const atualizarStatusItem = async (
