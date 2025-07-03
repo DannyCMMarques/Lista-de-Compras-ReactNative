@@ -1,10 +1,10 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { styles } from "./style";
 import { selecionadorProps } from "./interface";
+import { styles } from "./style";
 
-export default function Selecionador(props: Readonly<selecionadorProps>) {
+export default function Seletor(props: Readonly<selecionadorProps>) {
     const { title, type, options, selected, onSelect } = props;
     const renderItem = (item: any) => {
         const value = item?.value ?? item;
@@ -42,7 +42,7 @@ export default function Selecionador(props: Readonly<selecionadorProps>) {
                     <>
                         <MaterialIcons
                             name={icon}
-                            size={26}
+                            size={22}
                             color={isSelected ? "#047857" : "#6b7280"}
                         />
                         {hasLabel && <Text style={styles.label}>{item.label}</Text>}

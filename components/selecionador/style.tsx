@@ -30,11 +30,11 @@ export const styles = StyleSheet.create({
     },
     itemBoxComDescricao: {
         ...baseBox,
-        width: 55,
-        height: 55,
+        width: 75,
+        height: 70,
     },
     label: {
-        fontSize: 12,
+        fontSize: 10,
         marginTop: 4,
         color: '#374151',
         textAlign: 'center',
