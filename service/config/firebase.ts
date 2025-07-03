@@ -2,16 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC85y6q5yxz_Sr1BfWcufx9UClkSEgOiFg",
-    authDomain: "listamercadoapp-561d9.firebaseapp.com",
-    projectId: "listamercadoapp-561d9",
-    storageBucket: "listamercadoapp-561d9.firebasestorage.app",
-    messagingSenderId: "1085189265318",
-    appId: "1:1085189265318:web:f67a53d726e4efeb612167",
-    measurementId: "G-C3RW7NT0J4"
+    apiKey: "AIzaSyCQYUOdVpHagr3WdXAw8blgyBi9oyk6J3U",
+    authDomain: "shopping-list-app-90827.firebaseapp.com",
+    projectId: "shopping-list-app-90827",
+    storageBucket: "shopping-list-app-90827.firebasestorage.app",
+    messagingSenderId: "169847957305",
+    appId: "1:169847957305:web:1df611d5abcb1543d7aae8"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export { db };
+
