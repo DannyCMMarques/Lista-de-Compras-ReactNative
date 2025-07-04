@@ -48,7 +48,6 @@ export default function FormularioListas() {
             corEscolhida: corSelecionada,
             iconeEscolhido: iconeSelecionado,
         };
-        console.log(payload);
         try {
             criarListaMutation.mutate(payload);
             handleSucess();

@@ -58,7 +58,6 @@ export default function FormularioItens() {
             ...data,
             categoria: categoriaSelecionada,
         };
-        console.log(payload);
         try {
             criarItensMutation.mutate(payload);
             handleSucess();
