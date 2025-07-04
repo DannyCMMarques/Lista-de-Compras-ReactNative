@@ -3,42 +3,69 @@ import InputField from "@/components/input-field";
 import Modal from "@/components/modal";
 import Seletor from "@/components/seletor";
 import TituloComIcone from "@/components/ui/tituloIcone/index";
-import { COLORS } from "@/constants/Colors";
+import { useCriarLista } from "@/hooks/useListas";
+import { ListaRequest } from "@/service/interfaces/listasInterface";
 import { stylesCentral } from "@/src/styles/stylesCentral";
 import { CORES_LISTA } from "@/utils/content/coresListas";
 import { ICON_CARD } from "@/utils/content/iconesCardsLista";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Toast } from "toastify-react-native";
 import * as z from "zod/v4";
 
 
 const schema = z.object({
-    titulo: z.string().min(2, { message: "O título é obrigatório" }),
+    titulo: z.string().min(1, { message: "O título é obrigatório" }),
 });
 
 export default function FormularioListas() {
+    const criarListaMutation = useCriarLista();
+    const router = useRouter();
+    const [corSelecionada, setCorSelecionada] = useState(CORES_LISTA[0]);
+    const [iconeSelecionado, setIconeSelecionado] = useState("shopping-cart");
+
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(schema),
+        mode: 'onSubmit',
+        defaultValues: {
+            titulo: '',
+        },
     });
+    type FormularioListaData = z.infer<typeof schema>;
 
-    const [corSelecionada, setCorSelecionada] = useState(CORES_LISTA[0]);
-    const [iconeSelecionado, setIconeSelecionado] = useState("shopping-cart");
 
-    const onSubmit = (data: any) => {
-        console.log({
+    const onSubmit = (data: FormularioListaData) => {
+        const payload: ListaRequest = {
             ...data,
-            cor: corSelecionada,
-            icone: iconeSelecionado,
-        });
+            corEscolhida: corSelecionada,
+            iconeEscolhido: iconeSelecionado,
+        };
+        console.log(payload);
+        try {
+            criarListaMutation.mutate(payload);
+            handleSucess();
+        }
+        catch (error) {
+            console.error("Erro ao criar lista:", error);
+        }
     };
+    const handleVoltar = () => {
+        router.back();
 
+    }
+    const handleSucess = () => {
+        Toast.success("Lista criada com sucesso!");
+        handleVoltar();
+
+    }
     return (
         <SafeAreaView >
             <Modal title="Adicionar Listas" >
@@ -75,7 +102,7 @@ export default function FormularioListas() {
                         texto="Criar Lista"
                     />
                     <BotaoComponente
-                        onPress={handleSubmit(onSubmit)}
+                        onPress={handleVoltar}
                         texto="Cancelar"
                         colorBackground="rgb(227 223 223)"
                         color="black"

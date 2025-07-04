@@ -1,9 +1,13 @@
 export interface ListaRequest {
-    nome: string;
+    titulo: string;
+    corEscolhida: string,
+    iconeEscolhido: string;
 }
 
 export interface ListaResponse {
     id: string;
-    nome: string;
+    titulo: string;
     createdAt: Date;
+    corEscolhida: string,
+    iconeEscolhido: string;
 }

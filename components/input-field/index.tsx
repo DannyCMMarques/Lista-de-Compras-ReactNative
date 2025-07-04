@@ -1,6 +1,6 @@
 import React from "react";
+import { Control, Controller, FieldError } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
-import { Controller, Control, FieldError } from "react-hook-form";
 import { styles } from "./styles";
 
 type InputFieldProps = {
@@ -29,7 +29,7 @@ export default function InputField({
                         placeholder={placeholder}
                         onBlur={onBlur}
                         onChangeText={(text) => onChange(parse ? parse(text) : text)}
-                        value={value?.toString() ?? ""}
+                        value={value?.toString()}
                     />
                 )}
             />
