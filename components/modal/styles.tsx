@@ -1,12 +1,12 @@
 import { COLORS } from '@/constants/Colors';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
+const screenHeight = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
-    container: {
+    modal: {
+        backgroundColor: "white",
         flex: 1,
-        backgroundColor: '#fff',
-        padding: 16,
     },
     header: {
         flexDirection: 'row',
@@ -21,8 +21,7 @@ export const styles = StyleSheet.create({
         marginLeft: 12,
     },
     content: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: COLORS.cinza_principal,
+        padding: 10,
+        height: screenHeight,
     },
 });

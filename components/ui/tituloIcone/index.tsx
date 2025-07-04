@@ -19,7 +19,7 @@ export default function TituloComIcone({
     return (
         <View style={styles.wrapper}>
             <View style={[styles.iconContainer, { backgroundColor: iconBackground }]}>
-                <MaterialIcons name={iconName} size={28} color={iconColor} />
+                <MaterialIcons name={iconName} size={24} color={iconColor} />
             </View>
             <Text style={styles.title}>{title}</Text>
         </View>

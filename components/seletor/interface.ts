@@ -7,7 +7,7 @@ export type color = string;
 };
 
 export type seletorProps = {
-    title: string;
+    title?: string;
     type: "color" | "icon" | "iconComDescricao";
     options: color[] | iconDescricao[];
     selected: string | null;

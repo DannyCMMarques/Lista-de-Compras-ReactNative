@@ -1,11 +1,11 @@
+import { stylesCentral } from "@/src/styles/stylesCentral";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import {  seletorProps } from "./interface";
+import { seletorProps } from "./interface";
 import { styles } from "./style";
 
-export default function Seletor(props: Readonly<seletorProps>) {
-    const { title, type, options, selected, onSelect } = props;
+export default function Seletor({title, type, options, selected, onSelect}: seletorProps) {
     const renderItem = (item: any) => {
         const value = item?.value ?? item;
         const icon = item?.icon ?? item;
@@ -53,8 +53,10 @@ export default function Seletor(props: Readonly<seletorProps>) {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{title}</Text>
+        <View style={stylesCentral.container}>
+          {
+            (title && <Text style={styles.title}>{title}</Text>)
+          }
             <View style={styles.grid}>{options.map(renderItem)}</View>
         </View>
     );

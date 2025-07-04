@@ -10,9 +10,6 @@ const baseBox: ViewStyle = {
 };
 
 export const styles = StyleSheet.create({
-    container: {
-        marginBottom: 20,
-    },
     title: {
         fontWeight: 'bold',
         fontSize: 16,
@@ -21,12 +18,15 @@ export const styles = StyleSheet.create({
     grid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 12,
+        gap: 5,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        height:"auto",
     },
     itemBox: {
         ...baseBox,
-        width: 48,
-        height: 48,
+        width: 45,
+        height: 45,
     },
     itemBoxComDescricao: {
         ...baseBox,
