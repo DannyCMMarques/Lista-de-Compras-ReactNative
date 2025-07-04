@@ -9,6 +9,8 @@ type InputFieldProps = {
     control: Control<any>;
     error?: FieldError;
     parse?: (value: string) => any;
+    keyboardType?: "default" | "numeric" | "email-address" | "phone-pad";
+
 };
 
 export default function InputField({
@@ -17,6 +19,7 @@ export default function InputField({
     control,
     error,
     parse,
+    keyboardType = "default",
 }: InputFieldProps) {
     return (
         <View>
@@ -30,6 +33,7 @@ export default function InputField({
                         onBlur={onBlur}
                         onChangeText={(text) => onChange(parse ? parse(text) : text)}
                         value={value?.toString()}
+                        keyboardType={keyboardType}
                     />
                 )}
             />
