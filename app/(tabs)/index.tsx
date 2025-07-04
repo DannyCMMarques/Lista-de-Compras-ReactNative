@@ -1,9 +1,30 @@
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-export default function HomeScreen() {
+
+import BotaoFlutuante from "@/components/botao-flutuante";
+import { useRouter } from "expo-router";
+import React from "react";
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+
+
+export default function Home() {
+  const router = useRouter();
+
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Hoome</Text>
+    <SafeAreaView style={styles.container}>
+  
+      <BotaoFlutuante onPress={() => router.push("../adicionar-listas")} />
+
+
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollContent: {
+    padding: 16,
+    gap: 20,
+  },
+
+});

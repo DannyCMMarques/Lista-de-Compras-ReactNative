@@ -1,10 +1,10 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { selecionadorProps } from "./interface";
+import {  seletorProps } from "./interface";
 import { styles } from "./style";
 
-export default function Seletor(props: Readonly<selecionadorProps>) {
+export default function Seletor(props: Readonly<seletorProps>) {
     const { title, type, options, selected, onSelect } = props;
     const renderItem = (item: any) => {
         const value = item?.value ?? item;
