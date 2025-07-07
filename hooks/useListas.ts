@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, UseMutationResult, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
     criarLista,
     deletarLista,
@@ -7,17 +7,16 @@ import {
 import { ListaRequest } from '@/service/interfaces/listasInterface';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 
-export const useCriarLista = () => {
+export const useCriarLista = (): UseMutationResult<void, Error, ListaRequest> => {
     const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn: (data: ListaRequest) => criarLista(data),
+    return useMutation<void, Error, ListaRequest>({
+        mutationFn: criarLista,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.LISTAS });
         },
     });
 };
-
 export const useListarListas = () => {
     return useQuery({
         queryKey: QUERY_KEYS.LISTAS,
@@ -27,7 +26,6 @@ export const useListarListas = () => {
 
 export const useDeletarLista = () => {
     const queryClient = useQueryClient();
-
     return useMutation({
         mutationFn: (listaId: string) => deletarLista(listaId),
         onSuccess: () => {

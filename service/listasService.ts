@@ -15,8 +15,10 @@ const listasRef = collection(db, 'listas');
 
 export const criarLista = async (data: ListaRequest): Promise<void> => {
   await addDoc(listasRef, {
-    nome: data.nome,
+    titulo: data.titulo,
     createdAt: serverTimestamp(),
+    corEscolhida:data.corEscolhida,
+    iconeEscolhido: data.iconeEscolhido,
   });
 };
 
@@ -26,8 +28,10 @@ export const listarListas = async (): Promise<ListaResponse[]> => {
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
-    nome: doc.data().nome,
+    titulo: doc.data().titulo,
     createdAt: doc.data().createdAt?.toDate(),
+    corEscolhida: doc.data().corEscolhida,
+    iconeEscolhido: doc.data().iconeEscolhido,
   }));
 };
 

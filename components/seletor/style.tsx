@@ -1,6 +1,14 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle,Dimensions } from 'react-native';
 
+const { width } = Dimensions.get('window');
 
+let widthItemComDescricao = 75;
+let heightItemComDescricao = 70;
+
+if (width < 420) {
+    widthItemComDescricao = 71;
+    heightItemComDescricao = 60;
+}
 const baseBox: ViewStyle = {
     borderRadius: 8,
     alignItems: 'center',
@@ -10,9 +18,6 @@ const baseBox: ViewStyle = {
 };
 
 export const styles = StyleSheet.create({
-    container: {
-        marginBottom: 20,
-    },
     title: {
         fontWeight: 'bold',
         fontSize: 16,
@@ -21,17 +26,20 @@ export const styles = StyleSheet.create({
     grid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 12,
+        gap: 5,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        height:"auto",
     },
     itemBox: {
         ...baseBox,
-        width: 48,
-        height: 48,
+        width: 45,
+        height: 45,
     },
     itemBoxComDescricao: {
         ...baseBox,
-        width: 75,
-        height: 70,
+        width: widthItemComDescricao,
+        height: heightItemComDescricao,
     },
     label: {
         fontSize: 10,
