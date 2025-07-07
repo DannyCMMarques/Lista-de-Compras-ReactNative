@@ -27,7 +27,7 @@ export default function Seletor({ title, type, options, selected, onSelect }: se
                 style={[
                     hasLabel ? styles.itemBoxComDescricao : styles.itemBox,
                     type === "color" && {
-                        backgroundColor: value,
+                        backgroundColor: `${value}33`,
                         borderWidth: isSelected ? 2 : 0,
                         borderColor: "#fff",
                     },

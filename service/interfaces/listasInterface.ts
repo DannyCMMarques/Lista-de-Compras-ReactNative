@@ -1,3 +1,6 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import { ItensListaResponse } from "./ItemListaInterface";
+
 export interface ListaRequest {
     titulo: string;
     corEscolhida: string,
@@ -9,5 +12,6 @@ export interface ListaResponse {
     titulo: string;
     createdAt: Date;
     corEscolhida: string,
-    iconeEscolhido: string;
+    iconeEscolhido: keyof typeof MaterialIcons.glyphMap;
+    itensDaLista: ItensListaResponse[];
 }

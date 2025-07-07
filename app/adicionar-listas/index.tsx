@@ -69,7 +69,7 @@ export default function FormularioListas() {
         <SafeAreaView >
             <Modal title="Adicionar Listas" >
                 <View style={[stylesCentral.miniContainer, { justifyContent: 'flex-start', marginBottom: 6 }]}>
-                    <TituloComIcone title="Nome da Lista" iconName="list" />
+                    <TituloComIcone titulo="Nome da Lista" iconName="list" />
                     <InputField
                         name="titulo"
                         placeholder="Digite o título da sua lista"
@@ -78,7 +78,7 @@ export default function FormularioListas() {
                     />
                 </View>
                 <View style={[stylesCentral.miniContainer, { justifyContent: 'flex-start', marginBottom: 6 }]}>
-                    <TituloComIcone title="Cor da Lista" iconName="palette" />
+                    <TituloComIcone titulo="Cor da Lista" iconName="palette" />
                     <Seletor
                         type="color"
                         options={CORES_LISTA}
@@ -87,7 +87,7 @@ export default function FormularioListas() {
                     />
                 </View>
                 <View style={[stylesCentral.miniContainer, { justifyContent: 'flex-start', marginBottom: 6 }]}>
-                    <TituloComIcone title="Ícone da Lista" iconName="category" />
+                    <TituloComIcone titulo="Ícone da Lista" iconName="category" />
                     <Seletor
                         type="icon"
                         options={ICON_CARD}

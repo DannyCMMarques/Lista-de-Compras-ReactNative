@@ -1,19 +1,22 @@
 
 import BotaoFlutuante from "@/components/botao-flutuante";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { Toast } from "toastify-react-native";
+import { SafeAreaView, StyleSheet, Text } from "react-native";
 import ToastManager from "toastify-react-native/components/ToastManager";
 
 
-export default function ItensLista() {
+export default function VisualizarListaToDo() {
     const router = useRouter();
+    const { id } = useLocalSearchParams();
 
     return (
         <SafeAreaView style={styles.containerPrincipal}>
+            <Text>
+                O ID dessa lista é {id}
+            </Text>
             <ToastManager />
-            <BotaoFlutuante onPress={() => router.push("../adicionar-listas")} />
+            <BotaoFlutuante onPress={() => router.push("../adicionar-itens")} />
         </SafeAreaView>
     );
 }
@@ -24,5 +27,6 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     scrollContent: {
-        padding: 16    },
+        padding: 16
+    },
 });

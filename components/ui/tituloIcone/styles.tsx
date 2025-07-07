@@ -1,10 +1,11 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from "react-native";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 let fontSize = 17;
 let widthIcon = 30;
 let heightIcon = 30;
+
 if (width < 420) {
     fontSize = 15;
     widthIcon = 25;
@@ -12,11 +13,18 @@ if (width < 420) {
 }
 export const styles = StyleSheet.create({
     wrapper: {
+        flexDirection: "column",
+        gap: 4,
+    },
+    iconTitleRow: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "flex-start",
-        marginBottom: 10,
-        gap: 6,
+        justifyContent: "space-between",
+    },
+    iconLeft: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
     },
     iconContainer: {
         width: widthIcon,
@@ -27,6 +35,17 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontSize: fontSize,
-        fontWeight: 600,
+        fontWeight: "600",
+        color: "#111827",
+    },
+    subtituloCard: {
+        fontSize: 14,
+        color: "#6b7280",
+        fontWeight: "500",
+    },
+    iconeTitulo: {
+        flexDirection: 'row',       
+        alignItems: 'center',         
+        justifyContent: 'space-between',
     },
 });

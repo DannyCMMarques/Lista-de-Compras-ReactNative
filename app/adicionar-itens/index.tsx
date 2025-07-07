@@ -26,7 +26,8 @@ const schema = z.object({
 });
 
 export default function FormularioItens() {
-    const criarItensMutation = useAdicionarItem("LISmVHEDnaEmtr7HXdpZ");
+    const criarItensMutation = useAdicionarItem("AXofzR5Z07ECdTN712Wr");
+
     const router = useRouter();
     const [categoriaSelecionada, setCategoriaSelecionada] = useState("outros");
     const unidadeOptions = [
@@ -79,7 +80,7 @@ export default function FormularioItens() {
         <SafeAreaView >
             <Modal title="Adicionar itens" >
                 <View style={[stylesCentral.miniContainer, { justifyContent: 'flex-start', marginBottom: 6 }]}>
-                    <TituloComIcone title="Nome do Item" iconName="list" />
+                    <TituloComIcone titulo="Nome do Item" iconName="list" />
                     <InputField
                         name="nome"
                         placeholder="Digite o nome do seu item"
@@ -91,10 +92,11 @@ export default function FormularioItens() {
                     style={[
                         stylesCentral.miniContainer,
                         styles.divInputOptions,
+                        { marginVertical: 8 }
                     ]}
                 >
                     <View style={{ flex: 1 }}>
-                        <TituloComIcone title="Quantidade do Item" iconName="format-list-numbered" />
+                        <TituloComIcone titulo="Quantidade do Item" iconName="format-list-numbered" />
                         <InputField
                             name="quantidade"
                             placeholder="Digite a quantidade do seu item"
@@ -106,7 +108,7 @@ export default function FormularioItens() {
                     </View>
 
                     <View style={{ flex: 1 }}>
-                        <TituloComIcone title="Selecione a unidade" iconName="straighten" />
+                        <TituloComIcone titulo="Selecione a unidade" iconName="straighten" />
                         <SelectField
                             name="unidade"
                             control={control}
@@ -118,7 +120,7 @@ export default function FormularioItens() {
                 </View>
 
                 <View style={[stylesCentral.miniContainer, { justifyContent: 'flex-start', marginBottom: 6 }]}>
-                    <TituloComIcone title="Selecione uma categoria" iconName="shopping-cart" />
+                    <TituloComIcone titulo="Selecione uma categoria" iconName="shopping-cart" />
                     <Seletor
                         type="iconComDescricao"
                         options={CATEGORIA_PRODUTOS}

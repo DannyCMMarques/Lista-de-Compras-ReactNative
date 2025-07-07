@@ -7,7 +7,6 @@ export const stylesCentral = StyleSheet.create({
         backgroundColor: '#FFFF',
         borderRadius: 8,
         padding: 12,
-        marginVertical: 8,
         borderColor: COLORS.cinza_principal,
         borderWidth: 1,
     },

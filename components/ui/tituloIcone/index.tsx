@@ -5,23 +5,45 @@ import { styles } from "./styles";
 
 type TituloComIconeProps = {
     iconName: keyof typeof MaterialIcons.glyphMap;
-    iconColor?: string;
-    iconBackground?: string;
-    title: string;
+    color?: string;
+    titulo: string;
+    isCard?: boolean;
+    subtitulo?: string;
 };
 
 export default function TituloComIcone({
     iconName,
-    iconColor = "#fff",
-    iconBackground = COLORS.verde_principal,
-    title,
+    color = COLORS.verde_principal,
+    titulo,
+    isCard = false,
+    subtitulo
 }: TituloComIconeProps) {
     return (
-        <View style={styles.wrapper}>
-            <View style={[styles.iconContainer, { backgroundColor: iconBackground }]}>
-                <MaterialIcons name={iconName} size={24} color={iconColor} />
+        <View style={[styles.wrapper]}>
+            <View style={styles.iconeTitulo}>
+                <View style={styles.iconLeft}>
+                    <View
+                        style={[
+                            styles.iconContainer,
+                            { backgroundColor: `${color}33` },
+                            isCard && { width: 38, height: 38 },
+                        ]}
+                    >
+                        <MaterialIcons name={iconName} size={24} color={color} />
+                    </View>
+                    <View>
+                        <Text style={styles.title}>{titulo}</Text>
+                        {isCard && subtitulo && (
+                            <Text style={styles.subtituloCard}>{subtitulo}</Text>
+                        )}
+                    </View>
+                </View>
+
+                {isCard && (
+                    <MaterialIcons name="share" size={24} color="#9ca3af" />
+                )}
             </View>
-            <Text style={styles.title}>{title}</Text>
         </View>
+
     );
 }
