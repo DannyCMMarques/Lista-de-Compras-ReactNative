@@ -5,7 +5,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { seletorProps } from "./interface";
 import { styles } from "./style";
 
-export default function Seletor({title, type, options, selected, onSelect}: seletorProps) {
+export default function Seletor({ title, type, options, selected, onSelect }: seletorProps) {
     const renderItem = (item: any) => {
         const value = item?.value ?? item;
         const icon = item?.icon ?? item;
@@ -54,9 +54,9 @@ export default function Seletor({title, type, options, selected, onSelect}: sele
 
     return (
         <View style={stylesCentral.container}>
-          {
-            (title && <Text style={styles.title}>{title}</Text>)
-          }
+            {
+                (title && <Text style={styles.title}>{title}</Text>)
+            }
             <View style={styles.grid}>{options.map(renderItem)}</View>
         </View>
     );

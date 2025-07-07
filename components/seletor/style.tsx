@@ -1,6 +1,14 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle,Dimensions } from 'react-native';
 
+const { width } = Dimensions.get('window');
 
+let widthItemComDescricao = 75;
+let heightItemComDescricao = 70;
+
+if (width < 420) {
+    widthItemComDescricao = 71;
+    heightItemComDescricao = 60;
+}
 const baseBox: ViewStyle = {
     borderRadius: 8,
     alignItems: 'center',
@@ -30,8 +38,8 @@ export const styles = StyleSheet.create({
     },
     itemBoxComDescricao: {
         ...baseBox,
-        width: 75,
-        height: 70,
+        width: widthItemComDescricao,
+        height: heightItemComDescricao,
     },
     label: {
         fontSize: 10,
