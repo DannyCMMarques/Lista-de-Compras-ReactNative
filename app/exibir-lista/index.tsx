@@ -24,7 +24,5 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     scrollContent: {
-        padding: 16,
-        gap: 20,
-    },
+        padding: 16    },
 });
