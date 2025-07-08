@@ -27,9 +27,7 @@ export function ListaCards({ lista }: ListaCardsProps) {
 
 
     const handleShareUrl = () => {
-
-
-        const redirecionartUrl = Linking.createURL(`lista/${lista.id}`);
+        const redirecionartUrl =Linking.createURL(`lista/${lista.id}`, { scheme: 'shoppinglistapp' });
         console.log(redirecionartUrl)
         Share.share({
             title: 'Confira minha lista de Compras',
