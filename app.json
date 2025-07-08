@@ -18,7 +18,8 @@
         "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#d1fae5"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.shoppinglistapp"
     },
     "web": {
       "favicon": "./assets/images/logo.png"
