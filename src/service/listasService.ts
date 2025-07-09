@@ -63,7 +63,7 @@ export const deletarLista = async (listaId: string): Promise<void> => {
   await deleteDoc(docRef);
 };
 
-export const buscarListaPorIdComItensAgrupadosPorCategoria = async (
+export const buscarListaPorId = async (
   listaId: string
 ): Promise<ListaAgrupadaPorCategoria> => {
   const listaRef = doc(db, 'listas', listaId);
