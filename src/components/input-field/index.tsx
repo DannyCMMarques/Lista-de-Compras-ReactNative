@@ -2,16 +2,8 @@ import React from "react";
 import { Control, Controller, FieldError } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
 import { styles } from "./styles";
+import { InputFieldProps } from "@/src/types/components/componentsTypes";
 
-type InputFieldProps = {
-    name: string;
-    placeholder?: string;
-    control: Control<any>;
-    error?: FieldError;
-    parse?: (value: string) => any;
-    keyboardType?: "default" | "numeric" | "email-address" | "phone-pad";
-
-};
 
 export default function InputField({
     name,

@@ -1,6 +1,16 @@
 
+import BotaoComponente from "@/src/components/botao";
+import InputField from "@/src/components/input-field";
+import Modal from "@/src/components/modal";
+import SelectField from "@/src/components/select-field";
+import Seletor from "@/src/components/seletor";
+import TituloComIcone from "@/src/components/ui/tituloIcone";
+import { useAdicionarItem } from "@/src/hooks/useItensLista";
+import { ItensListaRequest } from "@/src/service/interfaces/ItemListaInterface";
+import { stylesCentral } from "@/src/styles/stylesCentral";
+import { CATEGORIA_PRODUTOS } from "@/src/utils/content/categoriasProdutos";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
@@ -8,16 +18,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Toast } from "toastify-react-native";
 import * as z from "zod/v4";
 import { styles } from "./styles";
-import { useAdicionarItem } from "@/src/hooks/useItensLista";
-import { ItensListaRequest } from "@/src/service/interfaces/ItemListaInterface";
-import Modal from "@/src/components/modal";
-import TituloComIcone from "@/src/components/ui/tituloIcone";
-import InputField from "@/src/components/input-field";
-import { stylesCentral } from "@/src/styles/stylesCentral";
-import SelectField from "@/src/components/select-field";
-import Seletor from "@/src/components/seletor";
-import { CATEGORIA_PRODUTOS } from "@/src/utils/content/categoriasProdutos";
-import BotaoComponente from "@/src/components/botao";
 
 
 const schema = z.object({
@@ -27,7 +27,9 @@ const schema = z.object({
 });
 
 export default function FormularioItens() {
-    const criarItensMutation = useAdicionarItem("AXofzR5Z07ECdTN712Wr");
+    const { id } = useLocalSearchParams<{ id: string }>();
+
+    const criarItensMutation = useAdicionarItem(id);
 
     const router = useRouter();
     const [categoriaSelecionada, setCategoriaSelecionada] = useState("outros");
@@ -78,7 +80,7 @@ export default function FormularioItens() {
 
     }
     return (
-        <SafeAreaView >
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
             <Modal title="Adicionar itens" >
                 <View style={[stylesCentral.miniContainer, { justifyContent: 'flex-start', marginBottom: 6 }]}>
                     <TituloComIcone titulo="Nome do Item" iconName="list" />

@@ -2,8 +2,8 @@ import { stylesCentral } from "@/src/styles/stylesCentral";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { seletorProps } from "./interface";
 import { styles } from "./style";
+import { seletorProps } from "@/src/types/components/componentsTypes";
 
 export default function Seletor({ title, type, options, selected, onSelect }: seletorProps) {
     const renderItem = (item: any) => {
