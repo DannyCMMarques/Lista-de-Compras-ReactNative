@@ -11,6 +11,7 @@ if (width < 420) {
     widthIcon = 25;
     heightIcon = 25;
 }
+
 export const styles = StyleSheet.create({
     wrapper: {
         flexDirection: "column",
@@ -20,6 +21,11 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
+    },
+    linhaHorizontalWrapper: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between", 
     },
     iconLeft: {
         flexDirection: "row",
@@ -44,8 +50,14 @@ export const styles = StyleSheet.create({
         fontWeight: "500",
     },
     iconeTitulo: {
-        flexDirection: 'row',       
-        alignItems: 'center',         
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    linhaCategoria: {
+        flex: 1,
+        height: 1,
+        backgroundColor: "#E5E7EB",
+        marginLeft: 8,
     },
 });

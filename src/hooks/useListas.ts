@@ -1,11 +1,12 @@
 import { useMutation, UseMutationResult, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEYS } from '../constants/queryKeys';
+import { ListaRequest } from '../service/interfaces/listasInterface';
 import {
+    buscarListaPorId,
     criarLista,
     deletarLista,
     listarListas,
 } from './../service/listasService';
-import { ListaRequest } from '../service/interfaces/listasInterface';
-import { QUERY_KEYS } from '../constants/queryKeys';
 
 export const useCriarLista = (): UseMutationResult<void, Error, ListaRequest> => {
     const queryClient = useQueryClient();
@@ -31,5 +32,13 @@ export const useDeletarLista = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.LISTAS });
         },
+    });
+};
+
+export const useBuscarListaPorId = (id: string) => {
+    return useQuery({
+        queryKey: QUERY_KEYS.LISTA_POR_ID(id),
+        queryFn: () => buscarListaPorId(id),
+        enabled: !!id,
     });
 };

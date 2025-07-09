@@ -2,10 +2,8 @@ import { Text, View } from "react-native";
 import { styles } from './styles';
 import { ItensListaResponse } from "@/src/service/interfaces/ItemListaInterface";
 import { COLORS } from "@/src/constants/Colors";
+import { BarraDePorcentagemProps } from "@/src/types/components/componentsTypes";
 
-interface BarraDePorcentagemProps {
-    itens: ItensListaResponse[];
-}
 
 export function BarraDePorcentagem({ itens }: BarraDePorcentagemProps) {
     const total = itens.length;

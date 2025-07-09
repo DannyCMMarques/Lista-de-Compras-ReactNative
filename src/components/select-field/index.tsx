@@ -3,12 +3,7 @@ import { Control, Controller, FieldError } from "react-hook-form";
 import { Text, View } from "react-native";
 import { Picker } from "@react-native-picker/picker"; 
 import { styles } from "./styles";
-type SelectFieldProps = {
-    name: string;
-    control: Control<any>;
-    error?: FieldError;
-    options: { label: string; value: string }[];
-};
+import { SelectFieldProps } from "@/src/types/components/componentsTypes";
 
 export default function SelectField({
     name,

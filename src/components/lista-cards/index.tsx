@@ -8,10 +8,7 @@ import { Share } from 'react-native';
 import { ListaResponse } from '@/src/service/interfaces/listasInterface';
 import { useContadorDeTempo } from '@/src/hooks/useContadorDeTempo';
 import { stylesCentral } from '@/src/styles/stylesCentral';
-interface ListaCardsProps {
-    lista: ListaResponse;
-    [key: string]: any;
-}
+import { ListaCardsProps } from '@/src/types/components/componentsTypes';
 
 export function ListaCards({ lista }: ListaCardsProps) {
     const router = useRouter();
