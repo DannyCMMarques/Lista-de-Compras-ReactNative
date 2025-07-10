@@ -1,7 +1,7 @@
+import { BotaoFlutuanteProps } from "@/src/utils/types/components/componentsTypes";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { BotaoFlutuanteProps } from "@/src/types/components/componentsTypes";
 
 export default function BotaoFlutuante({ onPress }: BotaoFlutuanteProps) {
     return (

@@ -1,17 +1,15 @@
-import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Pressable, Share, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { BarraDePorcentagem } from "../barra-de-porcentagem";
 import TituloComIcone from "../ui/tituloIcone";
 
 import { useContadorDeTempo } from "@/src/hooks/useContadorDeTempo";
-import { stylesCentral } from "@/src/styles/stylesCentral";
-import { ListaCardsProps } from "@/src/types/components/componentsTypes";
 import { useDeletarLista } from "@/src/hooks/useListas";
 import { useShareLista } from "@/src/hooks/useShareLista";
 import { useShareListaCompleta } from "@/src/hooks/useShareListaCompleta";
-import { COLORS } from "@/src/constants/Colors";
+import { stylesCentral } from "@/src/styles/stylesCentral";
+import { ListaCardsProps } from "@/src/utils/types/components/componentsTypes";
 
 export function ListaCards({ lista }: ListaCardsProps) {
   const router = useRouter();

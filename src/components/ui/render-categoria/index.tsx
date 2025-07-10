@@ -1,8 +1,8 @@
+import { CategoriasUIProps } from "@/src/utils/types/components/componentsTypes";
 import { View } from "react-native";
-import TituloComIcone from "../tituloIcone";
 import { ItemRow } from "../item-row";
+import TituloComIcone from "../tituloIcone";
 import { styles } from "./styles";
-import { CategoriasUIProps } from "@/src/types/components/componentsTypes";
 
 export const CategoriasUI = ({
   item,

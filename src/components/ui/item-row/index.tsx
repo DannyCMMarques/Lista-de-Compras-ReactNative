@@ -1,12 +1,12 @@
+import Checkbox from "expo-checkbox";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import Checkbox from "expo-checkbox";
 
-import { COLORS } from "@/src/constants/Colors";
 import { stylesCentral } from "@/src/styles/stylesCentral";
-import { styles } from "./styles";
-import { ItemRowProps } from "@/src/types/components/componentsTypes";
+import { COLORS } from "@/src/utils/constants/Colors";
+import { ItemRowProps } from "@/src/utils/types/components/componentsTypes";
 import { MaterialIcons } from "@expo/vector-icons";
+import { styles } from "./styles";
 
 export function ItemRow({
   item,

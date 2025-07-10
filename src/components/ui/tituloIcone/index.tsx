@@ -1,8 +1,8 @@
+import { COLORS } from "@/src/utils/constants/Colors";
+import { TituloComIconeProps } from "@/src/utils/types/components/componentsTypes";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Text, View, TouchableOpacity } from "react-native";
-import { COLORS } from "@/src/constants/Colors";
+import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
-import { TituloComIconeProps } from "@/src/types/components/componentsTypes";
 
 export default function TituloComIcone({
   iconName,

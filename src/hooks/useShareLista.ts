@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
 import * as Linking from "expo-linking";
+import { useCallback } from "react";
 import { Share } from "react-native";
-import { ListaResponse } from "@/src/service/interfaces/listasInterface";
 
 export function useShareLista(
   lista: Pick<ListaResponse, "id" | "titulo">,

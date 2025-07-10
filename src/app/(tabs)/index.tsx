@@ -14,9 +14,9 @@ import ToastManager from "toastify-react-native/components/ToastManager";
 import BotaoFlutuante from "@/src/components/botao-flutuante";
 import { ListaCards } from "@/src/components/lista-cards";
 import { useListarListas } from "@/src/hooks/useListas";
-import { ListaResponse } from "@/src/service/interfaces/listasInterface";
 import { listarListas } from "@/src/service/listasService";
-import { COLORS } from "../../constants/Colors";
+import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
+import { COLORS } from "../../utils/constants/Colors";
 export default function Home() {
   const router = useRouter();
   const { data, isPending, isError, error } = useListarListas();

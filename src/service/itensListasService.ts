@@ -4,16 +4,14 @@ import {
     deleteDoc,
     doc,
     getDocs,
-    query,
     serverTimestamp,
     updateDoc,
-    where,
 } from 'firebase/firestore';
-import { db } from './config/firebase';
+import { db } from '../config/firebase';
 import {
     ItensListaRequest,
     ItensListaResponse,
-} from './interfaces/ItemListaInterface';
+} from '../utils/types/interfaces/ItemListaInterface';
 
 const collectionName = 'listas';
 
@@ -55,15 +53,6 @@ export const deletarItemDaLista = async (
     await deleteDoc(docRef);
 };
 
-export const listarItensPorCategoria = async (
-    listaId: string,
-    categoria: string
-): Promise<ItensListaResponse[]> => {
-    const itensRef = collection(db, collectionName, listaId, 'itens');
-    const q = query(itensRef, where('categoria', '==', categoria));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(parseItem);
-};
 
 export const atualizarStatusItem = async (
     listaId: string,

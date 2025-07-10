@@ -1,5 +1,5 @@
-import { ItensListaResponse } from "@/src/service/interfaces/ItemListaInterface";
-import { ListaResponse } from "@/src/service/interfaces/listasInterface";
+import { ItensListaResponse } from "@/src/utils/types/interfaces/ItemListaInterface";
+import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Control, FieldError } from "react-hook-form";
 

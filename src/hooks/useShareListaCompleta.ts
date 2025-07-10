@@ -1,6 +1,6 @@
+import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
 import { useCallback } from "react";
 import { Share } from "react-native";
-import { ListaResponse } from "@/src/service/interfaces/listasInterface";
 
 export function useShareListaCompleta(
   lista: Pick<ListaResponse, "titulo" | "itensDaLista">

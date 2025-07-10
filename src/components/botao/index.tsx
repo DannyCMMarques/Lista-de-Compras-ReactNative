@@ -1,7 +1,7 @@
-import { TouchableOpacity, Text } from "react-native";
+import { COLORS } from "@/src/utils/constants/Colors";
+import { BotaoComponentProps } from "@/src/utils/types/components/componentsTypes";
+import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { COLORS } from "@/src/constants/Colors";
-import { BotaoComponentProps } from "@/src/types/components/componentsTypes";
 
 export default function BotaoComponente({
   onPress,

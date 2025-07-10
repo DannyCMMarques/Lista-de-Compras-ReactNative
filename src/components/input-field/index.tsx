@@ -1,8 +1,8 @@
+import { InputFieldProps } from "@/src/utils/types/components/componentsTypes";
 import React from "react";
-import { Control, Controller, FieldError } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
 import { styles } from "./styles";
-import { InputFieldProps } from "@/src/types/components/componentsTypes";
 
 export default function InputField({
   name,

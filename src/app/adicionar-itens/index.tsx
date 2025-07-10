@@ -4,10 +4,12 @@ import Modal from "@/src/components/modal";
 import SelectField from "@/src/components/select-field";
 import Seletor from "@/src/components/seletor";
 import TituloComIcone from "@/src/components/ui/tituloIcone";
+import { useHandleVoltar } from "@/src/hooks/useHandleVoltar";
 import { useAdicionarItem } from "@/src/hooks/useItensLista";
-import { ItensListaRequest } from "@/src/service/interfaces/ItemListaInterface";
 import { stylesCentral } from "@/src/styles/stylesCentral";
 import { CATEGORIA_PRODUTOS } from "@/src/utils/content/categoriasProdutos";
+import { unidadeOptions } from "@/src/utils/content/unidadeOptions";
+import { ItensListaRequest } from "@/src/utils/types/interfaces/ItemListaInterface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
@@ -16,8 +18,6 @@ import { View } from "react-native";
 import { Toast } from "toastify-react-native";
 import * as z from "zod/v4";
 import { styles } from "./styles";
-import { useHandleVoltar } from "@/src/hooks/useHandleVoltar";
-import { unidadeOptions } from "@/src/utils/content/unidadeOptions";
 
 const schema = z.object({
   nome: z.string().min(1, { message: "O nome é obrigatório" }),
