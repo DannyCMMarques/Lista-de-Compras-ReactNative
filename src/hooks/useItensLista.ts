@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, UseMutationResult, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   adicionarItemNaLista,
   atualizarStatusItem,
@@ -30,15 +30,15 @@ export const useListarItens = (listaId: string) => {
   });
 };
 
-export const useDeletarItem = (listaId: string) => {
+export const useDeletarItem = (listaId: string): UseMutationResult<void, Error, string> => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (itemId: string) => deletarItemDaLista(listaId, itemId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.ITENS_LISTA(listaId),
-      });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.LISTA_POR_ID(listaId) });
+
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.LISTAS });
     },
   });
 };
