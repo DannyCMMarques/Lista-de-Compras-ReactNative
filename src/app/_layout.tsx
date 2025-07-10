@@ -1,22 +1,31 @@
 import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  SafeAreaView,       
+} from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
-  const [loaded] = useFonts({
-    PoppinsRegular: require('./../../assets/fonts/Poppins/Poppins-Medium.ttf'),
+  const [fontsLoaded] = useFonts({
+    PoppinsRegular: require('../../assets/fonts/Poppins/Poppins-Medium.ttf'),
   });
 
-  if (!loaded) return null;
+  if (!fontsLoaded) return null;
 
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
-        <Slot />
+        <SafeAreaView
+          style={{ flex: 1 }}       
+          edges={['top', 'left', 'right']} 
+        >
+          <Slot />
+        </SafeAreaView>
+
         <ToastManager
           position="top"
           theme="light"

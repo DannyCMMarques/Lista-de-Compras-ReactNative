@@ -1,21 +1,21 @@
+import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
   RefreshControl,
-  SafeAreaView,
   StyleSheet,
   Text,
 } from "react-native";
-import { useRouter } from "expo-router";
 import ToastManager from "toastify-react-native/components/ToastManager";
 
-import { COLORS } from "../../constants/Colors";
-import { ListaResponse } from "@/src/service/interfaces/listasInterface";
-import { useListarListas } from "@/src/hooks/useListas";
-import { listarListas } from "@/src/service/listasService";
-import { ListaCards } from "@/src/components/lista-cards";
 import BotaoFlutuante from "@/src/components/botao-flutuante";
+import { ListaCards } from "@/src/components/lista-cards";
+import { useListarListas } from "@/src/hooks/useListas";
+import { ListaResponse } from "@/src/service/interfaces/listasInterface";
+import { listarListas } from "@/src/service/listasService";
+import { COLORS } from "../../constants/Colors";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   const router = useRouter();
@@ -44,7 +44,7 @@ export default function Home() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.containerPrincipal}>
+    < >
       <ToastManager />
 
       {isPending && !refreshing ? (
@@ -53,8 +53,8 @@ export default function Home() {
         <FlatList
           data={listas}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ListaCards lista={item}  />}
-          // contentContainerStyle={styles}
+          renderItem={({ item }) => <ListaCards lista={item} />}
+          showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -71,8 +71,8 @@ export default function Home() {
         />
       )}
 
-      <BotaoFlutuante onPress={() => router.push("../adicionar-itens")} />
-    </SafeAreaView>
+      <BotaoFlutuante onPress={() => router.push("../adicionar-listas")} />
+    </>
   );
 }
 
