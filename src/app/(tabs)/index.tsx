@@ -55,6 +55,7 @@ export default function Home() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <ListaCards lista={item} />}
           showsVerticalScrollIndicator={false}
+          style={{backgroundColor:"#FFF"}}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -88,13 +89,14 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
 
-  header: {
-    alignItems: "center",
+  header: {  alignItems: "flex-start",
+
+  justifyContent: "flex-start",  
     marginTop: 24,
     marginBottom: 16,
   },
   logo: { width: 300, height: 100 },
-  title: { marginTop: 8, fontSize: 18, fontWeight: "600" },
+  title: { marginTop: 8, fontSize: 18, fontWeight: "600", marginLeft:60},
 
   empty: { textAlign: "center", marginTop: 20 },
 });

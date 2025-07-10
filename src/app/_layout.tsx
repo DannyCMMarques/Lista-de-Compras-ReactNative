@@ -1,11 +1,11 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
 import {
   SafeAreaProvider,
-  SafeAreaView,       
+  SafeAreaView,
 } from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
@@ -20,7 +20,7 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
         <SafeAreaView
-          style={{ flex: 1 }}       
+          style={{ flex: 1, backgroundColor:"#FFF" }}       
           edges={['top', 'left', 'right']} 
         >
           <Slot />
