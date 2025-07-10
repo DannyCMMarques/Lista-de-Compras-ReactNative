@@ -1,14 +1,8 @@
 import { ItensListaResponse } from "@/src/service/interfaces/ItemListaInterface";
 import { CATEGORIA_PRODUTOS } from "@/src/utils/content/categoriasProdutos";
 import { COR_POR_CATEGORIA } from "@/src/utils/content/corPorCategoria";
+import { CategoriaRenderData } from "../types/components/componentsTypes";
 
-export interface CategoriaRenderData {
-  key: string;
-  itens: ItensListaResponse[];
-  label: string;
-  icon: keyof (typeof CATEGORIA_PRODUTOS)[number]["icon"] | "category";
-  cor: string;
-}
 
 export function mapItensParaCategorias(
   itensAgrupados?: Record<string, ItensListaResponse[]>

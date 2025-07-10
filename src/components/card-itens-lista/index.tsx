@@ -8,6 +8,7 @@ import { buildItensComStatus } from "@/src/helpers/lista";
 import React from "react";
 import { FlatList, RefreshControl, Text, View } from "react-native";
 import { CardItensListaProps } from "@/src/types/components/componentsTypes";
+import { useDeletarItem } from "@/src/hooks/useItensLista";
 
 export default function CardItensLista({
   listaId,
@@ -17,8 +18,12 @@ export default function CardItensLista({
 }: CardItensListaProps) {
   const categorias = useCategorias(itensAgrupados);
   const showProgressBar = categorias.length > 0;
-
+const excluirItem = useDeletarItem(listaId);
   const { itensSelecionados, toggleSelecionado } = useToggleItens(listaId);
+ 
+  const handleDelete = (id:string) => {
+    excluirItem.mutate(id);
+  };
 
   const todosItensComStatus = React.useMemo(
     () => buildItensComStatus(categorias, itensSelecionados),
@@ -30,6 +35,7 @@ export default function CardItensLista({
       item={item}
       toggleSelecionado={toggleSelecionado}
       itensSelecionados={itensSelecionados}
+      handleDelete={handleDelete}
     />
   );
 

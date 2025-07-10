@@ -1,17 +1,21 @@
 import BotaoFlutuante from "@/src/components/botao-flutuante";
 import CardItensLista from "@/src/components/card-itens-lista";
 import Modal from "@/src/components/modal";
+import TituloComIcone from "@/src/components/ui/tituloIcone";
 import { COLORS } from "@/src/constants/Colors";
-import { useBuscarListaPorId } from "@/src/hooks/useListas";
+import { useContadorDeTempo } from "@/src/hooks/useContadorDeTempo";
+import { useBuscarListaPorId, useDeletarLista } from "@/src/hooks/useListas";
+import { useShareLista } from "@/src/hooks/useShareLista";
+import { useShareListaCompleta } from "@/src/hooks/useShareListaCompleta";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import ToastManager from "toastify-react-native/components/ToastManager";
+import { styles } from "./styles";
 
 export default function VisualizarLista() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-
   const {
     data: lista,
     isPending,
@@ -19,6 +23,10 @@ export default function VisualizarLista() {
     error,
     refetch,
   } = useBuscarListaPorId(id);
+
+
+
+
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -31,6 +39,7 @@ export default function VisualizarLista() {
     }
   }, [refetch]);
 
+
   return (
     <>
       <ToastManager />
@@ -38,12 +47,15 @@ export default function VisualizarLista() {
         {isPending && !refreshing ? (
           <ActivityIndicator size="large" color={COLORS.verde_principal} />
         ) : (
-          <CardItensLista
-            listaId={id}
-            itensAgrupados={lista?.itensAgrupados}
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
+<View style={{ marginTop: 30  }}>
+   
+            <CardItensLista
+              listaId={id}
+              itensAgrupados={lista?.itensAgrupados}
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          </View>
         )}
       </Modal>
 

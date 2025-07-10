@@ -8,14 +8,23 @@ import TituloComIcone from "../ui/tituloIcone";
 import { useContadorDeTempo } from "@/src/hooks/useContadorDeTempo";
 import { stylesCentral } from "@/src/styles/stylesCentral";
 import { ListaCardsProps } from "@/src/types/components/componentsTypes";
+import { useDeletarLista } from "@/src/hooks/useListas";
+import { useShareLista } from "@/src/hooks/useShareLista";
+import { useShareListaCompleta } from "@/src/hooks/useShareListaCompleta";
+import { COLORS } from "@/src/constants/Colors";
 
 export function ListaCards({ lista }: ListaCardsProps) {
   const router = useRouter();
   const tempoFormatado = useContadorDeTempo(lista.createdAt);
   const totalItens = lista.itensDaLista.length;
-  const subtitulo = `${totalItens} ${
-    totalItens === 1 ? "item" : "itens"
-  } • ${tempoFormatado}`;
+
+  const excluirLista = useDeletarLista();
+  const shareDeepLink = useShareLista({ id: lista.id, titulo: lista.titulo });
+  const shareCompleta = useShareListaCompleta(lista);
+
+  const subtitulo = `${totalItens} ${totalItens === 1 ? "item" : "itens"
+    } • ${tempoFormatado}`;
+
   const handleNavigate = () => {
     router.push({
       pathname: "/lista/[id]",
@@ -23,26 +32,23 @@ export function ListaCards({ lista }: ListaCardsProps) {
     });
   };
 
-  const handleShareUrl = () => {
-    const redirecionartUrl = Linking.createURL(`lista/${lista.id}`, {
-      scheme: "shoppinglistapp",
-    });
-    Share.share({
-      title: "Confira minha lista de Compras",
-      message: `Veja minha lista de compras "${lista.titulo}" no app: ${redirecionartUrl}`,
-    });
+  const handleDelete = () => {
+    excluirLista.mutate(lista.id);
   };
 
   return (
     <Pressable onPress={handleNavigate}>
-      <View style={[stylesCentral.miniContainer, { margin: 10, padding: 10 }]}>
+      <View style={[stylesCentral.miniContainer, { margin: 10, padding: 10, borderColor:'#cdd4d9'}]}>
         <TituloComIcone
           titulo={lista.titulo}
           iconName={lista.iconeEscolhido}
           color={lista.corEscolhida}
           isCard={true}
           subtitulo={subtitulo}
-          onPress={handleShareUrl}
+          onShareDeepLink={shareDeepLink}
+          onDelete={handleDelete}
+          onShare={shareCompleta}
+          temItens={totalItens !== 0}
         />
         <View style={{ marginTop: 20 }}>
           <BarraDePorcentagem itens={lista.itensDaLista} />

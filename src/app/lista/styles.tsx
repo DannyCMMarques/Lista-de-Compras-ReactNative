@@ -8,4 +8,9 @@ export const styles = StyleSheet.create({
     scrollContent: {
         padding: 16
     },
+    titulo:{
+        marginTop:25,
+        marginBottom:25,
+
+    }
 });
