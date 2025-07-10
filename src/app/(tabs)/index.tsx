@@ -1,22 +1,22 @@
+import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   RefreshControl,
-  SafeAreaView,
   StyleSheet,
   Text,
+  View,
 } from "react-native";
-import { useRouter } from "expo-router";
 import ToastManager from "toastify-react-native/components/ToastManager";
 
-import { COLORS } from "../../constants/Colors";
-import { ListaResponse } from "@/src/service/interfaces/listasInterface";
-import { useListarListas } from "@/src/hooks/useListas";
-import { listarListas } from "@/src/service/listasService";
-import { ListaCards } from "@/src/components/lista-cards";
 import BotaoFlutuante from "@/src/components/botao-flutuante";
-
+import { ListaCards } from "@/src/components/lista-cards";
+import { useListarListas } from "@/src/hooks/useListas";
+import { ListaResponse } from "@/src/service/interfaces/listasInterface";
+import { listarListas } from "@/src/service/listasService";
+import { COLORS } from "../../constants/Colors";
 export default function Home() {
   const router = useRouter();
   const { data, isPending, isError, error } = useListarListas();
@@ -44,7 +44,7 @@ export default function Home() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.containerPrincipal}>
+    <>
       <ToastManager />
 
       {isPending && !refreshing ? (
@@ -53,8 +53,9 @@ export default function Home() {
         <FlatList
           data={listas}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ListaCards lista={item}  />}
-          // contentContainerStyle={styles}
+          renderItem={({ item }) => <ListaCards lista={item} />}
+          showsVerticalScrollIndicator={false}
+          style={{backgroundColor:"#FFF"}}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -63,6 +64,15 @@ export default function Home() {
               tintColor={COLORS.verde_principal}
             />
           }
+          ListHeaderComponent={() => (
+            <View style={styles.header}>
+              <Image
+                source={require("@/assets/images/logo.png")}
+                style={{ width: 300, height: 100 }}
+              />
+              <Text style={styles.title}>Minhas listas:</Text>
+            </View>
+          )}
           ListEmptyComponent={
             <Text style={{ textAlign: "center", marginTop: 20 }}>
               Nenhuma lista encontrada. Crie uma nova lista para começar!
@@ -71,14 +81,22 @@ export default function Home() {
         />
       )}
 
-      <BotaoFlutuante onPress={() => router.push("../adicionar-itens")} />
-    </SafeAreaView>
+      <BotaoFlutuante onPress={() => router.push("../adicionar-listas")} />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  containerPrincipal: {
-    flex: 1,
-    padding: 16,
+  container: { flex: 1, backgroundColor: "#fff" },
+
+  header: {  alignItems: "flex-start",
+
+  justifyContent: "flex-start",  
+    marginTop: 24,
+    marginBottom: 16,
   },
+  logo: { width: 300, height: 100 },
+  title: { marginTop: 8, fontSize: 18, fontWeight: "600", marginLeft:60},
+
+  empty: { textAlign: "center", marginTop: 20 },
 });

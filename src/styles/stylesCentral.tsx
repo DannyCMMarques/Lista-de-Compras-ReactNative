@@ -12,5 +12,7 @@ export const stylesCentral = StyleSheet.create({
     },
     container: {
         padding: 16,
+        backgroundColor: '#FFFF',
+
     },
 });

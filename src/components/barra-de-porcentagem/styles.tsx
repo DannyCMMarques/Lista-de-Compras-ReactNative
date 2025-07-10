@@ -18,5 +18,7 @@ export const styles = StyleSheet.create({
         fontWeight: "500",
         textAlign: 'left',
         marginTop: 4
-    }
+    },
+        progressLabel: { fontWeight: "500", marginBottom: 6 },
+
 });

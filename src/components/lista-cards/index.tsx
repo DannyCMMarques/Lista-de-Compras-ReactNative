@@ -1,54 +1,59 @@
-import React from 'react';
-import { Pressable, View } from 'react-native';
-import { BarraDePorcentagem } from '../barra-de-porcentagem';
-import TituloComIcone from '../ui/tituloIcone';
+import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
-import * as Linking from 'expo-linking';
-import { Share } from 'react-native';
-import { ListaResponse } from '@/src/service/interfaces/listasInterface';
-import { useContadorDeTempo } from '@/src/hooks/useContadorDeTempo';
-import { stylesCentral } from '@/src/styles/stylesCentral';
-import { ListaCardsProps } from '@/src/types/components/componentsTypes';
+import React from "react";
+import { Pressable, Share, View } from "react-native";
+import { BarraDePorcentagem } from "../barra-de-porcentagem";
+import TituloComIcone from "../ui/tituloIcone";
+
+import { useContadorDeTempo } from "@/src/hooks/useContadorDeTempo";
+import { stylesCentral } from "@/src/styles/stylesCentral";
+import { ListaCardsProps } from "@/src/types/components/componentsTypes";
+import { useDeletarLista } from "@/src/hooks/useListas";
+import { useShareLista } from "@/src/hooks/useShareLista";
+import { useShareListaCompleta } from "@/src/hooks/useShareListaCompleta";
+import { COLORS } from "@/src/constants/Colors";
 
 export function ListaCards({ lista }: ListaCardsProps) {
-    const router = useRouter();
-    const tempoFormatado = useContadorDeTempo(lista.createdAt);
-    const totalItens = lista.itensDaLista.length;
-    const subtitulo = `${totalItens} ${totalItens === 1 ? 'item' : 'itens'} • ${tempoFormatado}`;
-    const handleNavigate = () => {
-        router.push({
-            pathname: "/lista/[id]",
-            params: { id: lista.id },
-        });
-    };
+  const router = useRouter();
+  const tempoFormatado = useContadorDeTempo(lista.createdAt);
+  const totalItens = lista.itensDaLista.length;
 
+  const excluirLista = useDeletarLista();
+  const shareDeepLink = useShareLista({ id: lista.id, titulo: lista.titulo });
+  const shareCompleta = useShareListaCompleta(lista);
 
-    const handleShareUrl = () => {
-        const redirecionartUrl =Linking.createURL(`lista/${lista.id}`, { scheme: 'shoppinglistapp' });
-        console.log(redirecionartUrl)
-        Share.share({
-            title: 'Confira minha lista de Compras',
-            message: `Veja minha lista de compras "${lista.titulo}" no app: ${redirecionartUrl}`,
-        });
-    }
+  const subtitulo = `${totalItens} ${totalItens === 1 ? "item" : "itens"
+    } • ${tempoFormatado}`;
 
+  const handleNavigate = () => {
+    router.push({
+      pathname: "/lista/[id]",
+      params: { id: lista.id },
+    });
+  };
 
-    return (
-        <Pressable onPress={handleNavigate}>
+  const handleDelete = () => {
+    excluirLista.mutate(lista.id);
+  };
 
-            <View style={stylesCentral.miniContainer}>
-                <TituloComIcone
-                    titulo={lista.titulo}
-                    iconName={lista.iconeEscolhido}
-                    color={lista.corEscolhida}
-                    isCard={true}
-                    subtitulo={subtitulo}
-                    onPress={handleShareUrl}
-                />
-                <View style={{ marginTop: 20 }} >
-                    <BarraDePorcentagem itens={lista.itensDaLista} />
-                </View>
-            </View>
-        </Pressable>
-    );
+  return (
+    <Pressable onPress={handleNavigate}>
+      <View style={[stylesCentral.miniContainer, { margin: 10, padding: 10, borderColor:'#cdd4d9'}]}>
+        <TituloComIcone
+          titulo={lista.titulo}
+          iconName={lista.iconeEscolhido}
+          color={lista.corEscolhida}
+          isCard={true}
+          subtitulo={subtitulo}
+          onShareDeepLink={shareDeepLink}
+          onDelete={handleDelete}
+          onShare={shareCompleta}
+          temItens={totalItens !== 0}
+        />
+        <View style={{ marginTop: 20 }}>
+          <BarraDePorcentagem itens={lista.itensDaLista} />
+        </View>
+      </View>
+    </Pressable>
+  );
 }

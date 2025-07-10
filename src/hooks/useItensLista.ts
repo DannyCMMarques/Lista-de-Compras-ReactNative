@@ -1,21 +1,24 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, UseMutationResult, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   adicionarItemNaLista,
   atualizarStatusItem,
   deletarItemDaLista,
   listarItensDaLista,
   listarItensPorCategoria,
-} from './../service/itensListasService'
-import { QUERY_KEYS } from '../constants/queryKeys';
-import { ItensListaRequest } from '../service/interfaces/ItemListaInterface';
+} from "./../service/itensListasService";
+import { QUERY_KEYS } from "../constants/queryKeys";
+import { ItensListaRequest } from "../service/interfaces/ItemListaInterface";
 
 export const useAdicionarItem = (listaId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (item: ItensListaRequest) => adicionarItemNaLista(listaId, item),
+    mutationFn: (item: ItensListaRequest) =>
+      adicionarItemNaLista(listaId, item),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.ITENS_LISTA(listaId) });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.ITENS_LISTA(listaId),
+      });
     },
   });
 };
@@ -27,18 +30,23 @@ export const useListarItens = (listaId: string) => {
   });
 };
 
-export const useDeletarItem = (listaId: string) => {
+export const useDeletarItem = (listaId: string): UseMutationResult<void, Error, string> => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (itemId: string) => deletarItemDaLista(listaId, itemId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.ITENS_LISTA(listaId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.LISTA_POR_ID(listaId) });
+
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.LISTAS });
     },
   });
 };
 
-export const useListarItensPorCategoria = (listaId: string, categoria: string) => {
+export const useListarItensPorCategoria = (
+  listaId: string,
+  categoria: string
+) => {
   return useQuery({
     queryKey: QUERY_KEYS.ITENS_POR_CATEGORIA(listaId, categoria),
     queryFn: () => listarItensPorCategoria(listaId, categoria),
@@ -53,7 +61,9 @@ export const useAtualizarStatusItem = (listaId: string) => {
     mutationFn: ({ idItem, comprado }: { idItem: string; comprado: boolean }) =>
       atualizarStatusItem(listaId, idItem, comprado),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.ITENS_LISTA(listaId) });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.ITENS_LISTA(listaId),
+      });
     },
   });
 };
