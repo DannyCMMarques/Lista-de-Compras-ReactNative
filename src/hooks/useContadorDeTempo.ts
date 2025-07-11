@@ -1,12 +1,16 @@
 export const useContadorDeTempo = (data: Date | string): string => {
-  const dataAtual = new Date();
-  const dataInformada = new Date(data);
+  const agora = new Date();
+  const informada = new Date(data);
 
-  const diferencaEmMilissegundos =
-    dataAtual.getTime() - dataInformada.getTime();
-  const diferencaEmDias = Math.floor(
-    diferencaEmMilissegundos / (1000 * 60 * 60 * 24)
+  const hoje = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+  const diaInformado = new Date(
+    informada.getFullYear(),
+    informada.getMonth(),
+    informada.getDate()
   );
+
+  const diferencaEmMilissegundos = hoje.getTime() - diaInformado.getTime();
+  const diferencaEmDias = Math.floor(diferencaEmMilissegundos / (1000 * 60 * 60 * 24));
 
   if (diferencaEmDias === 0) return "Hoje";
   if (diferencaEmDias === 1) return "Ontem";

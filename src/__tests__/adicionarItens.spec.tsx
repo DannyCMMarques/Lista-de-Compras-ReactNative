@@ -29,8 +29,8 @@ jest.mock('react-hook-form', () => {
       formState: { errors: {} },
       handleSubmit:
         (cb: (data: any) => void) =>
-        () =>
-          cb({ nome: 'Maçã', quantidade: 1, unidade: 'unidade' }),
+          () =>
+            cb({ nome: 'Maçã', quantidade: 1, unidade: 'unidade' }),
     }),
   };
 });

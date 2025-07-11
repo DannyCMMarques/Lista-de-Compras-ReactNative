@@ -41,6 +41,7 @@ export const listarListas = async (): Promise<ListaResponse[]> => {
           quantidade: itemData.quantidade,
           comprado: itemData.comprado,
           createdAt: itemData.createdAt?.toDate(),
+          unidade:itemData.unidade,
         };
       });
 

@@ -1,10 +1,8 @@
-// src/components/render-categoria/categoriaUI.spec.tsx
 import { itemMock1, itemMock2 } from '@/src/utils/mocks/itensMock';
 import { MaterialIcons } from '@expo/vector-icons';
 import { render } from '@testing-library/react-native';
 import React from 'react';
-import { CategoriasUI } from './index';    // ou './index' se você tiver um index.tsx que re-exporta
-
+import { CategoriasUI } from './index';   
 jest.mock('../tituloIcone', () => ({
     __esModule: true,
     default: jest.fn(() => null),

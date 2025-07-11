@@ -1,17 +1,17 @@
-import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, act, waitFor } from '@testing-library/react-native';
+import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { renderHook, act, waitFor } from "@testing-library/react-native";
 
 import {
   useAdicionarItem,
   useListarItens,
   useDeletarItem,
   useAtualizarStatusItem,
-} from '@/src/hooks/useItensLista';
+} from "@/src/hooks/useItensLista";
 
-import { QUERY_KEYS } from '@/src/utils/constants/queryKeys';
+import { QUERY_KEYS } from "@/src/utils/constants/queryKeys";
 
-jest.mock('@/src/service/itensListasService', () => ({
+jest.mock("@/src/service/itensListasService", () => ({
   adicionarItemNaLista: jest.fn(),
   listarItensDaLista: jest.fn(),
   deletarItemDaLista: jest.fn(),
@@ -23,14 +23,22 @@ import {
   listarItensDaLista,
   deletarItemDaLista,
   atualizarStatusItem,
-} from '@/src/service/itensListasService';
+} from "@/src/service/itensListasService";
 
-import { itemMock1, itemMock2 } from '@/src/utils/mocks/itensMock';
+import { itemMock1, itemMock2 } from "@/src/utils/mocks/itensMock";
 
-const mockAdicionarItemNaLista = adicionarItemNaLista as jest.MockedFunction<typeof adicionarItemNaLista>;
-const mockListarItensDaLista   = listarItensDaLista   as jest.MockedFunction<typeof listarItensDaLista>;
-const mockDeletarItemDaLista   = deletarItemDaLista   as jest.MockedFunction<typeof deletarItemDaLista>;
-const mockAtualizarStatusItem  = atualizarStatusItem  as jest.MockedFunction<typeof atualizarStatusItem>;
+const mockAdicionarItemNaLista = adicionarItemNaLista as jest.MockedFunction<
+  typeof adicionarItemNaLista
+>;
+const mockListarItensDaLista = listarItensDaLista as jest.MockedFunction<
+  typeof listarItensDaLista
+>;
+const mockDeletarItemDaLista = deletarItemDaLista as jest.MockedFunction<
+  typeof deletarItemDaLista
+>;
+const mockAtualizarStatusItem = atualizarStatusItem as jest.MockedFunction<
+  typeof atualizarStatusItem
+>;
 
 const criarWrapperComQueryClient = () => {
   const queryClient = new QueryClient({
@@ -46,86 +54,92 @@ const criarWrapperComQueryClient = () => {
 
 afterEach(() => jest.clearAllMocks());
 
-describe('Hooks de Itens da Lista (React Native)', () => {
-  test('useAdicionarItem chama o service e invalida o cache', async () => {
+describe("Hooks de Itens da Lista (React Native)", () => {
+  test("useAdicionarItem chama o service e invalida o cache", async () => {
     const { ProvedorDeQuery, queryClient } = criarWrapperComQueryClient();
-    const { result } = renderHook(() => useAdicionarItem('l1'), { wrapper: ProvedorDeQuery });
+    const { result } = renderHook(() => useAdicionarItem("l1"), {
+      wrapper: ProvedorDeQuery,
+    });
 
     mockAdicionarItemNaLista.mockResolvedValueOnce(undefined);
 
     await act(async () =>
       result.current.mutateAsync({
-        nome: 'Uva',
+        nome: "Uva",
         quantidade: 1,
-        categoria: 'frutas',
-        unidade: 'kg',
-      }),
+        categoria: "frutas",
+        unidade: "kg",
+      })
     );
 
     await waitFor(() =>
       expect(
-        queryClient.isFetching({ queryKey: QUERY_KEYS.ITENS_LISTA('l1') }),
-      ).toBe(0),
+        queryClient.isFetching({ queryKey: QUERY_KEYS.ITENS_LISTA("l1") })
+      ).toBe(0)
     );
 
-    expect(mockAdicionarItemNaLista).toHaveBeenCalledWith('l1', {
-      nome: 'Uva',
+    expect(mockAdicionarItemNaLista).toHaveBeenCalledWith("l1", {
+      nome: "Uva",
       quantidade: 1,
-      categoria: 'frutas',
-      unidade: 'kg',
+      categoria: "frutas",
+      unidade: "kg",
     });
   });
 
-  test('useListarItens retorna o array que o service devolve', async () => {
+  test("useListarItens retorna o array que o service devolve", async () => {
     mockListarItensDaLista.mockResolvedValueOnce([itemMock1, itemMock2]);
 
     const { ProvedorDeQuery } = criarWrapperComQueryClient();
-    const { result } = renderHook(() => useListarItens('l1'), { wrapper: ProvedorDeQuery });
+    const { result } = renderHook(() => useListarItens("l1"), {
+      wrapper: ProvedorDeQuery,
+    });
 
     await waitFor(() =>
-      expect(result.current.data).toEqual([itemMock1, itemMock2]),
+      expect(result.current.data).toEqual([itemMock1, itemMock2])
     );
-    expect(mockListarItensDaLista).toHaveBeenCalledWith('l1');
+    expect(mockListarItensDaLista).toHaveBeenCalledWith("l1");
   });
 
-  test('useDeletarItem remove item e invalida as queries corretas', async () => {
+  test("useDeletarItem remove item e invalida as queries corretas", async () => {
     const { ProvedorDeQuery, queryClient } = criarWrapperComQueryClient();
-    const { result } = renderHook(() => useDeletarItem('l1'), { wrapper: ProvedorDeQuery });
+    const { result } = renderHook(() => useDeletarItem("l1"), {
+      wrapper: ProvedorDeQuery,
+    });
 
     mockDeletarItemDaLista.mockResolvedValueOnce(undefined);
 
-    await act(async () => result.current.mutateAsync('i99'));
+    await act(async () => result.current.mutateAsync("i99"));
 
     await waitFor(() =>
       expect(
-        queryClient.isFetching({ queryKey: QUERY_KEYS.LISTA_POR_ID('l1') }),
-      ).toBe(0),
+        queryClient.isFetching({ queryKey: QUERY_KEYS.LISTA_POR_ID("l1") })
+      ).toBe(0)
     );
     await waitFor(() =>
-      expect(
-        queryClient.isFetching({ queryKey: QUERY_KEYS.LISTAS }),
-      ).toBe(0),
+      expect(queryClient.isFetching({ queryKey: QUERY_KEYS.LISTAS })).toBe(0)
     );
 
-    expect(mockDeletarItemDaLista).toHaveBeenCalledWith('l1', 'i99');
+    expect(mockDeletarItemDaLista).toHaveBeenCalledWith("l1", "i99");
   });
 
-  test('useAtualizarStatusItem atualiza o status e invalida o cache', async () => {
+  test("useAtualizarStatusItem atualiza o status e invalida o cache", async () => {
     const { ProvedorDeQuery, queryClient } = criarWrapperComQueryClient();
-    const { result } = renderHook(() => useAtualizarStatusItem('l1'), { wrapper: ProvedorDeQuery });
+    const { result } = renderHook(() => useAtualizarStatusItem("l1"), {
+      wrapper: ProvedorDeQuery,
+    });
 
     mockAtualizarStatusItem.mockResolvedValueOnce(undefined);
 
     await act(async () =>
-      result.current.mutateAsync({ idItem: 'i42', comprado: true }),
+      result.current.mutateAsync({ idItem: "i42", comprado: true })
     );
 
     await waitFor(() =>
       expect(
-        queryClient.isFetching({ queryKey: QUERY_KEYS.ITENS_LISTA('l1') }),
-      ).toBe(0),
+        queryClient.isFetching({ queryKey: QUERY_KEYS.ITENS_LISTA("l1") })
+      ).toBe(0)
     );
 
-    expect(mockAtualizarStatusItem).toHaveBeenCalledWith('l1', 'i42', true);
+    expect(mockAtualizarStatusItem).toHaveBeenCalledWith("l1", "i42", true);
   });
 });

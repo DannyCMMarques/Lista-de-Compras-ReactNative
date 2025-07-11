@@ -6,7 +6,6 @@ import TituloComIcone from "../tituloIcone";
 
 import { useContadorDeTempo } from "@/src/hooks/useContadorDeTempo";
 import { useDeletarLista } from "@/src/hooks/useListas";
-import { useShareLista } from "@/src/hooks/useShareLista";
 import { useShareListaCompleta } from "@/src/hooks/useShareListaCompleta";
 import { stylesCentral } from "@/src/styles/stylesCentral";
 import { ListaCardsProps } from "@/src/utils/types/components/componentsTypes";
@@ -17,7 +16,6 @@ export function ListaCards({ lista }: ListaCardsProps) {
   const totalItens = lista.itensDaLista.length;
 
   const excluirLista = useDeletarLista();
-  const shareDeepLink = useShareLista({ id: lista.id, titulo: lista.titulo });
   const shareCompleta = useShareListaCompleta(lista);
 
   const subtitulo = `${totalItens} ${totalItens === 1 ? "item" : "itens"
@@ -43,10 +41,8 @@ export function ListaCards({ lista }: ListaCardsProps) {
           color={lista.corEscolhida}
           isCard={true}
           subtitulo={subtitulo}
-          onShareDeepLink={shareDeepLink}
           onDelete={handleDelete}
           onShare={shareCompleta}
-          temItens={totalItens !== 0}
         />
         <View style={{ marginTop: 20 }}>
           <BarraDePorcentagem itens={lista.itensDaLista} />

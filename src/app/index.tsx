@@ -6,6 +6,7 @@ import {
   RefreshControl,
   StyleSheet,
   Text,
+  View,
 } from "react-native";
 import ToastManager from "toastify-react-native/components/ToastManager";
 
@@ -15,6 +16,7 @@ import { useListarListas } from "@/src/hooks/useListas";
 import { listarListas } from "@/src/service/listasService";
 import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
 import { COLORS } from "../utils/constants/Colors";
+import { styles } from "./style";
 export default function Home() {
   const router = useRouter();
   const { data, isPending, isError, error } = useListarListas();
@@ -67,9 +69,11 @@ export default function Home() {
             <Text style={styles.title}>Minhas listas:</Text>
           )}
           ListEmptyComponent={
-            <Text style={{ textAlign: "center", marginTop: 20 }}>
-              Nenhuma lista encontrada. Crie uma nova lista para começar!
-            </Text>
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>
+                Nenhuma lista encontrada. Crie uma nova lista para começar!
+              </Text>
+            </View>
           }
         />
       )}
@@ -79,18 +83,3 @@ export default function Home() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-
-  header: {
-    alignItems: "flex-start",
-
-    justifyContent: "flex-start",
-    marginTop: 24,
-    marginBottom: 16,
-
-  },
-  title: { marginTop: 25, fontSize: 25, fontWeight: "600", marginLeft: 20 },
-
-  empty: { textAlign: "center", marginTop: 20 },
-});

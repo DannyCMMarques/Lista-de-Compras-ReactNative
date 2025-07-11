@@ -1,6 +1,17 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, act, waitFor } from "@testing-library/react-native";
+import {
+  criarLista,
+  listarListas,
+  deletarLista,
+  buscarListaPorId,
+} from "@/src/service/listasService";
+
+import {
+  mockListas,
+  mockListaAgrupadaPorCategoria,
+} from "@/src/utils/mocks/listasMock";
 
 import {
   useCriarLista,
@@ -17,18 +28,6 @@ jest.mock("@/src/service/listasService", () => ({
   deletarLista: jest.fn(),
   buscarListaPorId: jest.fn(),
 }));
-
-import {
-  criarLista,
-  listarListas,
-  deletarLista,
-  buscarListaPorId,
-} from "@/src/service/listasService";
-
-import {
-  mockListas,
-  mockListaAgrupadaPorCategoria,
-} from "@/src/utils/mocks/listasMock";
 
 const mockCriarLista = criarLista as jest.MockedFunction<typeof criarLista>;
 const mockListarListas = listarListas as jest.MockedFunction<

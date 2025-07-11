@@ -10,11 +10,9 @@ export default function TituloComIcone({
   titulo,
   isCard = false,
   subtitulo,
-  onShareDeepLink,
   onShare,
   onDelete,
   comLinha = false,
-  temItens
 }: TituloComIconeProps) {
   return (
     <View style={styles.wrapper}>
@@ -40,17 +38,7 @@ export default function TituloComIcone({
 
         {isCard && !comLinha && (
           <View style={styles.icones}>
-
-            {
-              temItens && (
-                <TouchableOpacity onPress={onShare}>
-                  <MaterialIcons name="content-copy" size={24} color="#9ca3af" />
-                </TouchableOpacity>
-
-              )
-            }
-            
-            <TouchableOpacity onPress={onShareDeepLink}>
+            <TouchableOpacity onPress={onShare}>
               <MaterialIcons name="share" size={24} color="#9ca3af" />
             </TouchableOpacity>
 
@@ -58,7 +46,6 @@ export default function TituloComIcone({
               <MaterialIcons name="delete" size={24} color="red" />
             </TouchableOpacity>
           </View>
-
         )}
 
         {comLinha && <View style={styles.linhaCategoria} />}

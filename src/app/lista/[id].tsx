@@ -14,8 +14,6 @@ export default function VisualizarLista() {
   const {
     data: lista,
     isPending,
-    isError,
-    error,
     refetch,
   } = useBuscarListaPorId(id);
 

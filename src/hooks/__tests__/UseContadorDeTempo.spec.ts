@@ -3,7 +3,7 @@
 import { useContadorDeTempo } from "../useContadorDeTempo";
 
 
-const hoje = new Date('2025-07-10T12:00:00Z'); 
+const hoje = new Date('2025-07-10T12:00:00Z');
 
 beforeAll(() => {
   jest.useFakeTimers().setSystemTime(hoje);
@@ -25,7 +25,7 @@ describe('useContadorDeTempo', () => {
   });
 
   it('retorna "X dias atrás" para menos de 30 dias', () => {
-    const resultado = useContadorDeTempo('2025-06-25T12:00:00Z'); 
+    const resultado = useContadorDeTempo('2025-06-25T12:00:00Z');
     expect(resultado).toBe('15 dias atrás');
   });
 

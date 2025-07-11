@@ -73,11 +73,9 @@ export type TituloComIconeProps = {
   titulo: string;
   isCard?: boolean;
   subtitulo?: string;
-  onShareDeepLink?: () => void;
   onShare?: () => void;
   onDelete?: () => void;
   comLinha?: boolean;
-  temItens?: boolean;
   color?:string;
 };
 
@@ -91,7 +89,7 @@ export type CardItensListaProps = {
 export type CategoriasUIProps = {
   handleDelete: (itemId: string) => void;
   item: CategoriaRenderData;
-  toggleSelecionado: (itemId: string, isChecked: boolean) => void; // <- dois args
+  toggleSelecionado: (itemId: string, isChecked: boolean) => void; 
   itensSelecionados: Record<string, boolean>;
 };
 
