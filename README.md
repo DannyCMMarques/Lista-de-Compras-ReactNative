@@ -19,30 +19,22 @@ Este é um aplicativo mobile de lista de compras, desenvolvido em React Native c
 - **Linguagem**: TypeScript (~5.8.3)  
 - **Roteamento / Navegação**:  
   - expo-router (~5.1.2)  
-
 - **Formulários & Validação**:  
   - react-hook-form  
   - @hookform/resolvers  
   - zod  
-
 - **Integração com APIs**:  
   - @tanstack/react-query v5  
     *(utilizado em hooks personalizados para consumo de APIs)*  
-
 - **Persistência de Dados**:  
   - Em nuvem com Firebase (Firestore ou Realtime Database)  
-
 - **Linking & Compartilhamento**:  
   - API `Share` nativa do React Native  
-  - expo-linking  
-
 - **Notificações / Toasts**:  
   - toastify-react-native  
-
 - **Testes**:  
   - Jest & jest-expo  
-  - @testing-library/react-native & @testing-library/jest-native  
-
+  - @testing-library/react-native
 ---
 
 ## 📌 Funcionalidades
@@ -75,7 +67,8 @@ Este é um aplicativo mobile de lista de compras, desenvolvido em React Native c
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/c9a06e8f-26e1-49e4-aadc-8dbf973135a1" />
 <img width="300"  alt="image" src="https://github.com/user-attachments/assets/cc5a9763-aedf-49fc-ae41-3e3176a64a72" />
 <img width="300"  alt="image" src="https://github.com/user-attachments/assets/d12da96c-eb75-4975-b6b4-702b4f2dfef9" />
-<img width="300" alt="image" src="https://github.com/user-attachments/assets/56327aba-d665-4cfe-aa93-abe47fb6a566" />
+<img width="300" alt="Screenshot_1752264558" src="https://github.com/user-attachments/assets/2b46b16d-39e5-4ec8-a5b9-7e6401525e53" />
+
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/cda18c23-f9dc-48f5-976f-7155b08d0362" />
 
 
@@ -101,7 +94,7 @@ shopping-list-app/
 ## 🔍 Decisões técnicas tomadas
 
 - **React Native**  
-  Permite base única de código para Android e iOS, com hot-reload e comunidade ativa.
+  Permite base única de código para Android e iOS
 
 - **Expo**  
   Acelera o setup inicial, fornece APIs nativas via Expo Go e habilita OTA (over-the-air).
