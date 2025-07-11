@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "shopping-list-app",
+    "slug": "shopping-list-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.png",
+    "scheme": "shoppinglistapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#d1fae5"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/logo.png",
+        "backgroundColor": "#d1fae5"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.shoppinglistapp",
+      "versionCode": 2  
+    },
+    "web": {
+      "favicon": "./assets/images/logo.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "57cb2059-72e1-4c39-945d-fb9651e6707d"
+      }
+    }
+  }
+}
