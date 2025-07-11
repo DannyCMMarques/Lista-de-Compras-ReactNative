@@ -19,10 +19,6 @@ export default function VisualizarLista() {
     refetch,
   } = useBuscarListaPorId(id);
 
-
-
-
-
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(async () => {

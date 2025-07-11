@@ -42,7 +42,7 @@ jest.mock('@/src/components/seletor', () => ({
     __esModule: true,
     default: () => null,
 }));
-jest.mock('@/src/components/ui/tituloIcone', () => ({
+jest.mock('@/src/components/tituloIcone', () => ({
     __esModule: true,
     default: () => null,
 }));

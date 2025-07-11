@@ -3,7 +3,7 @@ import InputField from "@/src/components/input-field";
 import Modal from "@/src/components/modal";
 import SelectField from "@/src/components/select-field";
 import Seletor from "@/src/components/seletor";
-import TituloComIcone from "@/src/components/ui/tituloIcone";
+import TituloComIcone from "@/src/components/tituloIcone";
 import { useHandleVoltar } from "@/src/hooks/useHandleVoltar";
 import { useAdicionarItem } from "@/src/hooks/useItensLista";
 import { stylesCentral } from "@/src/styles/stylesCentral";

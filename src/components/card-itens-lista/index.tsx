@@ -7,8 +7,8 @@ import { CardItensListaProps } from "@/src/utils/types/components/componentsType
 import React from "react";
 import { FlatList, RefreshControl, Text, View } from "react-native";
 import { BarraDePorcentagem } from "../barra-de-porcentagem";
-import { CategoriasUI } from "../ui/render-categoria";
 import { styles } from "./styles";
+import { CategoriasUI } from "../render-categoria";
 
 export default function CardItensLista({
   listaId,
@@ -40,7 +40,6 @@ const excluirItem = useDeletarItem(listaId);
   );
 
   return (
-    <View>
       <FlatList
         data={categorias}
         renderItem={renderCategoria}
@@ -71,6 +70,6 @@ const excluirItem = useDeletarItem(listaId);
             : null
         }
       />
-    </View>
+
   );
 }

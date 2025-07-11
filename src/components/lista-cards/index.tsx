@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, View } from "react-native";
 import { BarraDePorcentagem } from "../barra-de-porcentagem";
-import TituloComIcone from "../ui/tituloIcone";
+import TituloComIcone from "../tituloIcone";
 
 import { useContadorDeTempo } from "@/src/hooks/useContadorDeTempo";
 import { useDeletarLista } from "@/src/hooks/useListas";
