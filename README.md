@@ -4,14 +4,15 @@
 
 Este é um aplicativo mobile de lista de compras, desenvolvido em React Native com Expo, que permite:
 
-- Criar Listas
-- Adicionar itens à lista
-- Remover itens da lista
-  -Excluir Lista
-- Marcar/desmarcar itens como “comprado”
-- Compartilhar toda a lista juntamente com uma marcação dos itens comprados via WhatsApp, e-mail etc.
+- **Criar** múltiplas listas de compras, definindo título, cor e ícone
+- **Adicionar** itens à lista (nome, quantidade, unidade, categoria)
+- **Remover** itens da lista
+- **Excluir** listas completas
+- **Marcar/desmarcar** itens como “comprado”
+- **Compartilhar** toda a lista, incluindo marcação dos itens comprados, via WhatsApp, e-mail etc.
 
 ---
+
 ## 📱 Stack utilizada
 
 - **Plataforma**: React Native (Expo SDK ~53.0.15)  
@@ -28,11 +29,12 @@ Este é um aplicativo mobile de lista de compras, desenvolvido em React Native c
   - @tanstack/react-query v5  
     *(utilizado em hooks personalizados para consumo de APIs)*  
 
-- **Backend-as-a-Service & Banco de Dados**:  
-  - Firebase v11 (Firestore / Realtime Database)  
+- **Persistência de Dados**:  
+  - Em nuvem com Firebase (Firestore ou Realtime Database)  
 
 - **Linking & Compartilhamento**:  
-  - API `Share` do React Native  
+  - API `Share` nativa do React Native  
+  - expo-linking  
 
 - **Notificações / Toasts**:  
   - toastify-react-native  
@@ -40,141 +42,153 @@ Este é um aplicativo mobile de lista de compras, desenvolvido em React Native c
 - **Testes**:  
   - Jest & jest-expo  
   - @testing-library/react-native & @testing-library/jest-native  
+
 ---
 
 ## 📌 Funcionalidades
 
-- **Visão Geral das Listas**
+### Visão Geral das Listas
 
-  - Tela inicial exibe todas as listas em ordem de criação
-  - Criar múltiplas listas de compras, informando:
-    - Título da lista
-    - Cor personalizada
-    - Ícone representativo
-  - Cada card mostra:
-    - Ícone e título
-    - Quantidade total de itens e data de criação (“Hoje”)
-    - Botões de **Compartilhar** e **Excluir**
-    - Compartilhar listas (via WhatsApp, e-mail, etc.)
+- Tela inicial exibe todas as listas em ordem de criação  
+- Criar múltiplas listas, informando:
+  - Título da lista  
+  - Cor personalizada  
+  - Ícone representativo  
+- Cada card mostra:
+  - Ícone, título e total de itens  
+  - Data de criação  
+  - Botões de **Compartilhar** e **Excluir**
 
-- **Dentro de Cada Lista**
+### Dentro de Cada Lista
 
-  - **Adicionar itens**, informando:
-    - Nome do produto
-    - Quantidade e unidade (ex.: 500 g, 10 unid.)
-    - Categoria (ex.: Frutas, Bebidas, Limpeza etc.)
-  - **Agrupamento** automático dos itens por categoria
-  - **Marcar/desmarcar** itens como “comprado” (checkbox)
-  - **Excluir** itens individualmente
-  - **Barra de progresso** exibindo a quantidade de itens comprados do total
+- **Adicionar itens**, informando:
+  - Nome do produto  
+  - Quantidade e unidade (ex.: 500 g, 10 unid.)  
+  - Categoria (ex.: Frutas, Bebidas, Limpeza etc.)  
+- **Agrupamento** automático dos itens por categoria  
+- **Marcar/desmarcar** itens como “comprado” (checkbox)  
+- **Excluir** itens individualmente  
+- **Barra de progresso** exibindo “X de Y itens comprados”
 
-  ***
+---
+## 📸 Prints
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/c9a06e8f-26e1-49e4-aadc-8dbf973135a1" />
+<img width="300"  alt="image" src="https://github.com/user-attachments/assets/cc5a9763-aedf-49fc-ae41-3e3176a64a72" />
+<img width="300"  alt="image" src="https://github.com/user-attachments/assets/d12da96c-eb75-4975-b6b4-702b4f2dfef9" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/56327aba-d665-4cfe-aa93-abe47fb6a566" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/cda18c23-f9dc-48f5-976f-7155b08d0362" />
+
 
 ## 🏗️ Arquitetura e estrutura do projeto
 
-**Estrutura de pastas:**
 ```plaintext
-src
-├── app/
-│   ├── adicionar-itens/
-│   ├── adicionar-listas/
-│   └── lista/
-├── components/
-├── config/
-├── hooks/
-│   └── __tests__/
-├── service/
-│   └── __tests__/
-├── styles/
-├── utils/
-│   ├── constants/
-│   ├── content/
-│   ├── helpers/
-│   ├── mocks/
-│   └── types/
-│       ├── components/
-│       └── interfaces/
-└── __tests__/
+shopping-list-app/
+├── expo/                   # Configurações do Expo (app.json, eas.json)
+├── src/
+│   ├── app/                # Telas (adicionar-lista, adicionar-itens, lista)
+│   ├── components/         # Componentes reutilizáveis
+│   ├── hooks/              # Custom hooks (+ __tests__)
+│   ├── service/            # Integração com APIs / Firebase (+ __tests__)
+│   ├── styles/             # Estilos compartilhados
+│   └── utils/              # Tipos, constantes, helpers, mocks
+├── .gitignore
+├── package.json
+└── README.md
 ```
 
 ---
+
 ## 🔍 Decisões técnicas tomadas
 
 - **React Native**  
-  Escolhido pela capacidade de desenvolver uma única base de código para Android e iOS, com hot-reload, vasto ecossistema de bibliotecas e comunidade ativa.
+  Permite base única de código para Android e iOS, com hot-reload e comunidade ativa.
+
 - **Expo**  
-  Utilizado para acelerar o setup inicial, fornecer APIs nativas (Expo Go), gerenciar assets (imagens, fontes) e habilitar atualizações OTA (over-the-air) sem recriar o binário.
+  Acelera o setup inicial, fornece APIs nativas via Expo Go e habilita OTA (over-the-air).
+
 - **TypeScript**  
-  Adoção de tipagem estática para melhorar a robustez do código, facilitar o autocompletar em IDEs e capturar erros em tempo de compilação.
+  Tipagem estática para robustez, autocompletar e prevenção de erros em build.
+
 - **react-hook-form**  
-  Selecionado pela abordagem declarativa, alta performance (menos re-renders) e integração fácil com validações via zod.
+  Validações declarativas, performance otimizada e integração fácil com zod.
+
 - **expo-router**  
-  Roteamento baseado em filesystem, permitindo layouts aninhados e navegação automática sem configuração manual de stacks.
+  Roteamento via filesystem, suporte a layouts aninhados e navegação sem configuração manual.
+
 - **@tanstack/react-query**  
-  Usado em hooks personalizados para consumo de APIs, gerenciamento de cache, refetch automático e sincronização de dados remotos.
+  Hooks personalizados para consumo de APIs, cache, refetch automático e sincronização.
+
 - **Firebase como BaaS**  
-  Backend-as-a-Service escolhido pela rapidez de configuração, SDKs oficiais e documentação completa para autenticação e banco de dados.
+  Rápida configuração de backend, SDKs oficiais e documentação completa.
+
 - **Firebase Firestore**  
-  Firestore utilizado para persistência em nuvem e sincronização em tempo real, com listeners que atualizam automaticamente a UI ao mudar os dados.
+  Persistência em nuvem e sincronização em tempo real com listeners.
+
 - **API Share nativa**  
-  Empregada para compartilhar listas via WhatsApp, e-mail e outros apps, usando o módulo `Share` do React Native sem dependências externas.
+  Compartilhamento de listas usando o módulo `Share` do React Native.
 
+---
 
-## 🧪 Como rodar o projeto 
+## 🧪 Como rodar o projeto
 
-1. **Pré-requisitos**
-
-   - Node.js (LTS)
-   - Yarn ou npm
-   - Expo CLI
+1. **Pré-requisitos**  
+   - Node.js (LTS)  
+   - Yarn ou npm  
+   - Expo CLI  
      ```bash
      npm install -g expo-cli
      # ou
      yarn global add expo-cli
      ```
 
-2. **Clone o Projeto 
-
+2. **Clonar o repositório**  
    ```bash
-   git clone: https://github.com/DannyCMMarques/Lista-de-Compras-ReactNative.git
-   cd shopping-list-app
+   git clone https://github.com/DannyCMMarques/Lista-de-Compras-ReactNative.git
+   cd SHOPPING-LIST-APP
    ```
-3- **Instale as dependências 
+
+3. **Instalar dependências**  
    ```bash
-  npm install
+   npm install
+   # ou
+   yarn install
    ```
-4-Execute o projeto no modo desenvolvimento 
-``
-npx expo start
-``
-   -  escaneie o QR Code com o app Expo Go em seu dispositivo real.
 
-
+4. **Executar em modo de desenvolvimento**  
+   ```bash
+   npx expo start
+   ```  
+   - Escaneie o QR Code com o app Expo Go ou pressione `a` (Android) / `i` (iOS).
 
 ---
 
-## Como gerar o build de produção
-### 🔸 Usando EAS Build (recomendado)
+## 📦 Como gerar o build de produção
 
-1. Instale o EAS CLI(se você não tiver):
+### Usando EAS Build (recomendado)
+
+1. Instalar EAS CLI (se necessário):  
    ```bash
    npm install -g eas-cli
    ```
-2. Autentique-se:
+
+2. Fazer login no Expo:  
    ```bash
    eas login
-   ```
-   - caso não possuir realize o cadastro nesse link aqui: https://expo.dev/signup
-3. Gere o APK Android:
+   ```  
+   *(Caso não tenha conta, cadastre-se em https://expo.dev/signup.)*
 
+3. Gerar o APK Android:  
    ```bash
    eas build -p android --profile production
-   ```
-   — Ao final, copie o link gerado e baixe seu `.apk` pronto para distribuição.
-
+   ```  
+   — Copie o link gerado e baixe o `.apk` para distribuição.
 
 ---
 
-## Como rodar os testes com cobertura 
+## 🧪 Como rodar os testes com cobertura
 
-
+```bash
+npm run test -- --coverage
+# ou
+yarn test --coverage
+```
