@@ -9,10 +9,11 @@ export function useShareLista(
 ) {
   return useCallback(() => {
     const url = Linking.createURL(`lista/${lista.id}`, { scheme });
-
+console.log(url);
     Share.share({
       title: "Confira minha lista de Compras",
-      message: `Veja minha lista de compras "${lista.titulo}" no app:\n${url}`,
+  message: `Veja minha lista de compras "${lista.titulo}" no app!\n${url}`,
+      url, 
     });
   }, [lista.id, lista.titulo, scheme]);
 }
