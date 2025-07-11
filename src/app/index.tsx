@@ -3,11 +3,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  Image,
   RefreshControl,
   StyleSheet,
   Text,
-  View,
 } from "react-native";
 import ToastManager from "toastify-react-native/components/ToastManager";
 
@@ -16,7 +14,7 @@ import { ListaCards } from "@/src/components/lista-cards";
 import { useListarListas } from "@/src/hooks/useListas";
 import { listarListas } from "@/src/service/listasService";
 import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
-import { COLORS } from "../../utils/constants/Colors";
+import { COLORS } from "../utils/constants/Colors";
 export default function Home() {
   const router = useRouter();
   const { data, isPending, isError, error } = useListarListas();
@@ -55,7 +53,7 @@ export default function Home() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <ListaCards lista={item} />}
           showsVerticalScrollIndicator={false}
-          style={{backgroundColor:"#FFF"}}
+          style={{ backgroundColor: "#FFF" }}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -65,13 +63,8 @@ export default function Home() {
             />
           }
           ListHeaderComponent={() => (
-            <View style={styles.header}>
-              <Image
-                source={require("@/assets/images/logo.png")}
-                style={{ width: 300, height: 100 }}
-              />
-              <Text style={styles.title}>Minhas listas:</Text>
-            </View>
+
+            <Text style={styles.title}>Minhas listas:</Text>
           )}
           ListEmptyComponent={
             <Text style={{ textAlign: "center", marginTop: 20 }}>
@@ -89,14 +82,15 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
 
-  header: {  alignItems: "flex-start",
+  header: {
+    alignItems: "flex-start",
 
-  justifyContent: "flex-start",  
+    justifyContent: "flex-start",
     marginTop: 24,
     marginBottom: 16,
+
   },
-  logo: { width: 300, height: 100 },
-  title: { marginTop: 8, fontSize: 18, fontWeight: "600", marginLeft:60},
+  title: { marginTop: 25, fontSize: 25, fontWeight: "600", marginLeft: 20 },
 
   empty: { textAlign: "center", marginTop: 20 },
 });
