@@ -1,9 +1,9 @@
 import { stylesCentral } from "@/src/styles/stylesCentral";
+import { seletorProps } from "@/src/utils/types/components/componentsTypes";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./style";
-import { seletorProps } from "@/src/types/components/componentsTypes";
 
 export default function Seletor({
   title,

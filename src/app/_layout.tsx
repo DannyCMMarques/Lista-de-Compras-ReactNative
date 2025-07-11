@@ -20,8 +20,9 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
         <SafeAreaView
-          style={{ flex: 1, backgroundColor:"#FFF" }}       
-          edges={['top', 'left', 'right']} 
+          style={{ flex: 1, backgroundColor: "#FFF" }}
+          edges={['top', 'left', 'right', 'bottom']}
+          mode="padding"
         >
           <Slot />
         </SafeAreaView>

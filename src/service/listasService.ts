@@ -9,9 +9,9 @@ import {
   query,
   serverTimestamp,
 } from 'firebase/firestore';
-import { db } from './config/firebase';
-import { ListaAgrupadaPorCategoria, ListaRequest, ListaResponse } from './interfaces/listasInterface';
-import { ItensListaResponse } from './interfaces/ItemListaInterface';
+import { db } from '../config/firebase';
+import { ItensListaResponse } from '../utils/types/interfaces/ItemListaInterface';
+import { ListaAgrupadaPorCategoria, ListaRequest, ListaResponse } from '../utils/types/interfaces/listasInterface';
 
 const listasRef = collection(db, 'listas');
 
@@ -41,6 +41,7 @@ export const listarListas = async (): Promise<ListaResponse[]> => {
           quantidade: itemData.quantidade,
           comprado: itemData.comprado,
           createdAt: itemData.createdAt?.toDate(),
+          unidade:itemData.unidade,
         };
       });
 

@@ -1,14 +1,14 @@
-import { useToggleItens } from "@/src/hooks/useToggleItens";
-import { COLORS } from "@/src/constants/Colors";
-import { BarraDePorcentagem } from "../barra-de-porcentagem";
-import { CategoriasUI } from "../ui/render-categoria";
-import { styles } from "./styles";
 import { useCategorias } from "@/src/hooks/useCategorias";
-import { buildItensComStatus } from "@/src/helpers/lista";
+import { useDeletarItem } from "@/src/hooks/useItensLista";
+import { useToggleItens } from "@/src/hooks/useToggleItens";
+import { COLORS } from "@/src/utils/constants/Colors";
+import { buildItensComStatus } from "@/src/utils/helpers/lista";
+import { CardItensListaProps } from "@/src/utils/types/components/componentsTypes";
 import React from "react";
 import { FlatList, RefreshControl, Text, View } from "react-native";
-import { CardItensListaProps } from "@/src/types/components/componentsTypes";
-import { useDeletarItem } from "@/src/hooks/useItensLista";
+import { BarraDePorcentagem } from "../barra-de-porcentagem";
+import { styles } from "./styles";
+import { CategoriasUI } from "../render-categoria";
 
 export default function CardItensLista({
   listaId,
@@ -40,7 +40,6 @@ const excluirItem = useDeletarItem(listaId);
   );
 
   return (
-    <View>
       <FlatList
         data={categorias}
         renderItem={renderCategoria}
@@ -71,6 +70,6 @@ const excluirItem = useDeletarItem(listaId);
             : null
         }
       />
-    </View>
+
   );
 }

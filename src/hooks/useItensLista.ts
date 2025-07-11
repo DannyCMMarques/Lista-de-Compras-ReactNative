@@ -1,13 +1,12 @@
 import { useMutation, UseMutationResult, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEYS } from "../utils/constants/queryKeys";
+import { ItensListaRequest } from "../utils/types/interfaces/ItemListaInterface";
 import {
   adicionarItemNaLista,
   atualizarStatusItem,
   deletarItemDaLista,
   listarItensDaLista,
-  listarItensPorCategoria,
 } from "./../service/itensListasService";
-import { QUERY_KEYS } from "../constants/queryKeys";
-import { ItensListaRequest } from "../service/interfaces/ItemListaInterface";
 
 export const useAdicionarItem = (listaId: string) => {
   const queryClient = useQueryClient();
@@ -40,17 +39,6 @@ export const useDeletarItem = (listaId: string): UseMutationResult<void, Error, 
 
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.LISTAS });
     },
-  });
-};
-
-export const useListarItensPorCategoria = (
-  listaId: string,
-  categoria: string
-) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.ITENS_POR_CATEGORIA(listaId, categoria),
-    queryFn: () => listarItensPorCategoria(listaId, categoria),
-    enabled: !!categoria,
   });
 };
 

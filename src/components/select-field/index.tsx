@@ -1,9 +1,9 @@
-import React from "react";
-import { Control, Controller, FieldError } from "react-hook-form";
-import { Text, View } from "react-native";
+import { SelectFieldProps } from "@/src/utils/types/components/componentsTypes";
 import { Picker } from "@react-native-picker/picker";
+import React from "react";
+import { Controller } from "react-hook-form";
+import { Text, View } from "react-native";
 import { styles } from "./styles";
-import { SelectFieldProps } from "@/src/types/components/componentsTypes";
 
 export default function SelectField({
   name,

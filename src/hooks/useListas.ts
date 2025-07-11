@@ -4,8 +4,8 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../constants/queryKeys";
-import { ListaRequest } from "../service/interfaces/listasInterface";
+import { QUERY_KEYS } from "../utils/constants/queryKeys";
+import { ListaRequest } from "../utils/types/interfaces/listasInterface";
 import {
   buscarListaPorId,
   criarLista,

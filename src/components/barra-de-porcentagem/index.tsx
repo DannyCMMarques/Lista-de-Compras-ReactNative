@@ -1,7 +1,7 @@
+import { COLORS } from "@/src/utils/constants/Colors";
+import { BarraDePorcentagemProps } from "@/src/utils/types/components/componentsTypes";
 import { Text, View } from "react-native";
 import { styles } from "./styles";
-import { COLORS } from "@/src/constants/Colors";
-import { BarraDePorcentagemProps } from "@/src/types/components/componentsTypes";
 
 export function BarraDePorcentagem({ itens }: BarraDePorcentagemProps) {
   const total = itens.length;

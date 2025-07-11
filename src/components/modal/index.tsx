@@ -1,9 +1,9 @@
+import { ModalProps } from "@/src/utils/types/components/componentsTypes";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { styles } from "./styles";
-import { ModalProps } from "@/src/types/components/componentsTypes";
 
 export default function Modal({ title, children }: ModalProps) {
   const router = useRouter();

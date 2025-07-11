@@ -19,7 +19,8 @@
         "backgroundColor": "#d1fae5"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.shoppinglistapp"
+      "package": "com.anonymous.shoppinglistapp",
+      "versionCode": 2  
     },
     "web": {
       "favicon": "./assets/images/logo.png"
