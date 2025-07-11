@@ -1,10 +1,15 @@
-// CardItensLista.test.tsx
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
 import { RefreshControl, FlatList } from 'react-native'
 import { COLORS } from '@/src/utils/constants/Colors'
 import CardItensLista from '.'
 import { CategoriaRenderData } from '@/src/utils/types/components/componentsTypes'
+
+const mockUseCategorias = require('@/src/hooks/useCategorias').useCategorias as jest.Mock
+const mockUseDeletarItem = require('@/src/hooks/useItensLista').useDeletarItem as jest.Mock
+const mockUseToggleItens = require('@/src/hooks/useToggleItens').useToggleItens as jest.Mock
+const mockBuildItensComStatus = require('@/src/utils/helpers/lista').buildItensComStatus as jest.Mock
+const CategoriasUIMock = require('../render-categoria').CategoriasUI as jest.Mock
 
 jest.mock('@/src/hooks/useCategorias', () => ({
   useCategorias: jest.fn(),
@@ -26,13 +31,6 @@ jest.mock('../render-categoria', () => ({
   __esModule: true,
   CategoriasUI: jest.fn(() => null),
 }))
-
-const mockUseCategorias = require('@/src/hooks/useCategorias').useCategorias as jest.Mock
-const mockUseDeletarItem = require('@/src/hooks/useItensLista').useDeletarItem as jest.Mock
-const mockUseToggleItens = require('@/src/hooks/useToggleItens').useToggleItens as jest.Mock
-const mockBuildItensComStatus = require('@/src/utils/helpers/lista').buildItensComStatus as jest.Mock
-const BarraMock = require('../barra-de-porcentagem').BarraDePorcentagem as jest.Mock
-const CategoriasUIMock = require('../render-categoria').CategoriasUI as jest.Mock
 
 describe('CardItensLista', () => {
   const listaId = 'lista-123'

@@ -1,11 +1,9 @@
-// __tests__/BotaoFlutuante.test.tsx
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BotaoFlutuante from '.';
 
-// Mock do ícone para evitar carregamento de fontes em teste
 jest.mock('@expo/vector-icons', () => {
   const React = require('react');
   return {
@@ -13,7 +11,6 @@ jest.mock('@expo/vector-icons', () => {
   };
 });
 
-// Mock do hook de safe area
 jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: jest.fn(),
 }));
@@ -28,7 +25,6 @@ describe('BotaoFlutuante', () => {
     jest.clearAllMocks();
   });
 
-  // helper para achatar estilos
   function flattenStyle(styleProp: any) {
     return Array.isArray(styleProp)
       ? Object.assign({}, ...styleProp)

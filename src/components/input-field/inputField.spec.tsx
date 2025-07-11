@@ -1,7 +1,6 @@
-// __tests__/InputField.test.tsx
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import { Text, TextInput } from 'react-native';
+import { Text } from 'react-native';
 import { useForm, FieldError } from 'react-hook-form';
 import InputField from '.';
 
@@ -13,7 +12,6 @@ type FormValues = {
 describe('InputField', () => {
   const placeholder = 'Digite algo...';
 
-  // Agora o prop error é do tipo FieldError
   function FormWrapper(props: {
     error?: FieldError;
     parse?: (value: string) => any;
@@ -45,7 +43,7 @@ describe('InputField', () => {
 
   it('exibe mensagem de erro quando a prop error é passada', () => {
     const error: FieldError = {
-      type: 'manual',          // obrigatório
+      type: 'manual',         
       message: 'Campo inválido',
     };
     const { getByText } = render(<FormWrapper error={error} />);
@@ -68,7 +66,6 @@ describe('InputField', () => {
     const input = getByPlaceholderText(placeholder);
 
     fireEvent.changeText(input, '123');
-    // como parse devolve number, watch reflete 123 (não string)
     expect(getByTestId('output').props.children).toBe(123);
   });
 
