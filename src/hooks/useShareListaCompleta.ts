@@ -14,7 +14,6 @@ export function useShareListaCompleta(
       texto = [
         `Lista "${lista.titulo}":`,
         ...lista.itensDaLista.map((item) => {
-          console.log(item)
           const quantidadeComUnidade = `${item.quantidade}${item.unidade}`;
           return `• ${quantidadeComUnidade} x ${item.nome}${item.comprado ? " ✔️" : ""
             }`;

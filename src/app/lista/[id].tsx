@@ -6,7 +6,6 @@ import { COLORS } from "@/src/utils/constants/Colors";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
-import ToastManager from "toastify-react-native/components/ToastManager";
 
 export default function VisualizarLista() {
   const router = useRouter();
@@ -31,13 +30,12 @@ export default function VisualizarLista() {
 
   return (
     <>
-      <ToastManager />
       <Modal title="Lista de Compras">
         {isPending && !refreshing ? (
           <ActivityIndicator size="large" color={COLORS.verde_principal} />
         ) : (
-<View style={{ marginTop: 30  }}>
-   
+          <View style={{ marginTop: 30 }}>
+
             <CardItensLista
               listaId={id}
               itensAgrupados={lista?.itensAgrupados}
