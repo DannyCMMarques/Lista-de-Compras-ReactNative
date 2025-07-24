@@ -1,23 +1,22 @@
-import { useLocalSearchParams } from "expo-router";
-import { useErrorHandler } from "./useHandleError";
-import { useHandleVoltar } from "./useHandleVoltar";
-import { useAdicionarItem } from "./useItensLista";
-import { ItensListaRequest } from "../utils/types/interfaces/ItemListaInterface";
-import { useForm } from "react-hook-form";
+import { UseFormularioAdicionarItensReturn } from "@/src/utils/types/interfaces/UseFormularioAdicionarItensReturn ";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormularioListaData, schemaItens } from "../utils/schemas/schemasFormulariosItens";
+import { useLocalSearchParams } from "expo-router";
 import { useCallback, useState } from "react";
-import { Toast } from "toastify-react-native";
+import { useForm } from "react-hook-form";
+import { useAdicionarItem } from "../../useItensLista";
+import { useHandleSucess } from "../../useHandleSucess";
+import { useErrorHandler } from "../../useHandleError";
+import { FormularioItensData, schemaItens } from "@/src/utils/schemas/schemasFormulariosItens";
+import { ItensListaRequest } from "@/src/utils/types/interfaces/ItemListaInterface";
 
-export function useFormularioAdicionarItens() {
+export function useFormularioAdicionarItens():UseFormularioAdicionarItensReturn {
     const [categoriaSelecionada, setCategoriaSelecionada] = useState("outros");
 
     const { id } = useLocalSearchParams<{ id: string }>();
 
     const criarItensMutation = useAdicionarItem(id);
 
-    const handleVoltar = useHandleVoltar();
-
+   const handleSucess = useHandleSucess("Item criado com sucesso!");
     const { handleError } = useErrorHandler();
 
     const {
@@ -34,14 +33,9 @@ export function useFormularioAdicionarItens() {
         },
     });
 
-    const handleSucess = useCallback(() => {
-        Toast.success("Item criado com sucesso!");
-        handleVoltar();
-    }, [
-        handleVoltar
-    ]);
+   
 
-    const onSubmit = useCallback((data: FormularioListaData) => {
+    const onSubmit = useCallback((data: FormularioItensData) => {
         const payload: ItensListaRequest = {
             ...data,
             categoria: categoriaSelecionada,

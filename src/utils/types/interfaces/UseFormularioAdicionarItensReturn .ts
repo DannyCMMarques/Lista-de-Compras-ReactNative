@@ -1,11 +1,16 @@
 import { Dispatch, SetStateAction } from "react";
-import { Control, FieldErrors } from "react-hook-form";
-import { FormularioListaData } from "../../schemas/schemasFormulariosItens";
+import { Control, FieldErrors, UseFormHandleSubmit } from "react-hook-form";
+import { FormularioItensData } from "../../schemas/schemasFormulariosItens";
 
 export  interface UseFormularioAdicionarItensReturn {
-  control: Control<FormularioListaData>;
-  errors: FieldErrors<FormularioListaData>;
+  control: Control<FormularioItensData>;
+  errors: FieldErrors<FormularioItensData>;
   categoriaSelecionada: string;
   setCategoriaSelecionada: Dispatch<SetStateAction<string>>;
-  submit: () => void;
+  onSubmit:(data: FormularioItensData) => void,
+  handleSubmit:UseFormHandleSubmit<{
+    nome: string;
+    quantidade: number;
+    unidade: string;
+}>
 }

@@ -10,7 +10,7 @@ import { CATEGORIA_PRODUTOS } from "@/src/utils/content/categoriasProdutos";
 import { unidadeOptions } from "@/src/utils/content/unidadeOptions";
 import { View } from "react-native";
 import { styles } from "./styles";
-import { useFormularioAdicionarItens } from "@/src/hooks/useFormularioAdicionarItens";
+import { useFormularioAdicionarItens } from "@/src/hooks/app/formularios/useFormularioAdicionarItens";
 
 
 export default function FormularioItens() {
