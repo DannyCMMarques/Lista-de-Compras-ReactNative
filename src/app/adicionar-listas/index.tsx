@@ -3,6 +3,7 @@ import InputField from "@/src/components/input-field";
 import Modal from "@/src/components/modal";
 import Seletor from "@/src/components/seletor";
 import TituloComIcone from "@/src/components/tituloIcone";
+import { useErrorHandler } from "@/src/hooks/useHandleError";
 import { useHandleVoltar } from "@/src/hooks/useHandleVoltar";
 import { useCriarLista } from "@/src/hooks/useListas";
 import { stylesCentral } from "@/src/styles/stylesCentral";
@@ -21,10 +22,17 @@ const schema = z.object({
 });
 
 export default function FormularioListas() {
+
   const criarListaMutation = useCriarLista();
+
   const [corSelecionada, setCorSelecionada] = useState(CORES_LISTA[0]);
+
   const [iconeSelecionado, setIconeSelecionado] = useState("shopping-cart");
+
   const handleVoltar = useHandleVoltar();
+  
+  const {handleError} = useErrorHandler();
+
   const {
     control,
     handleSubmit,
@@ -48,7 +56,7 @@ export default function FormularioListas() {
       criarListaMutation.mutate(payload);
       handleSucess();
     } catch (error) {
-      console.error("Erro ao criar lista:", error);
+      handleError(error);
     }
   };
 

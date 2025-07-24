@@ -18,6 +18,7 @@ import { View } from "react-native";
 import { Toast } from "toastify-react-native";
 import * as z from "zod/v4";
 import { styles } from "./styles";
+import { useErrorHandler } from "@/src/hooks/useHandleError";
 
 const schema = z.object({
   nome: z.string().min(1, { message: "O nome é obrigatório" }),
@@ -29,8 +30,12 @@ export default function FormularioItens() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("outros");
 
   const { id } = useLocalSearchParams<{ id: string }>();
+
   const criarItensMutation = useAdicionarItem(id);
+
   const handleVoltar = useHandleVoltar();
+
+  const {handleError} = useErrorHandler();
 
   const {
     control,
@@ -45,6 +50,7 @@ export default function FormularioItens() {
       unidade: "unidade",
     },
   });
+  
   type FormularioListaData = z.infer<typeof schema>;
 
   const onSubmit = (data: FormularioListaData) => {
@@ -56,7 +62,7 @@ export default function FormularioItens() {
       criarItensMutation.mutate(payload);
       handleSucess();
     } catch (error) {
-      console.error("Erro ao criar lista:", error);
+      handleError(error);
     }
   };
 

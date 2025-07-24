@@ -31,13 +31,12 @@ export default function VisualizarLista() {
 
   return (
     <>
-      <ToastManager />
       <Modal title="Lista de Compras">
         {isPending && !refreshing ? (
           <ActivityIndicator size="large" color={COLORS.verde_principal} />
         ) : (
-<View style={{ marginTop: 30  }}>
-   
+          <View style={{ marginTop: 30 }}>
+
             <CardItensLista
               listaId={id}
               itensAgrupados={lista?.itensAgrupados}

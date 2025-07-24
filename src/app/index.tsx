@@ -1,23 +1,33 @@
 import { useRouter } from "expo-router";
+
 import React, { useCallback, useEffect, useState } from "react";
+
 import {
   ActivityIndicator,
   FlatList,
   RefreshControl,
-  StyleSheet,
   Text,
   View,
 } from "react-native";
-import ToastManager from "toastify-react-native/components/ToastManager";
 
 import BotaoFlutuante from "@/src/components/botao-flutuante";
+
 import { ListaCards } from "@/src/components/lista-cards";
+
 import { useListarListas } from "@/src/hooks/useListas";
+
 import { listarListas } from "@/src/service/listasService";
+
 import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
+
 import { COLORS } from "../utils/constants/Colors";
+
 import { styles } from "./style";
+
+import { useErrorHandler } from "../hooks/useHandleError";
+
 export default function Home() {
+  const { handleError } = useErrorHandler();
   const router = useRouter();
   const { data, isPending, isError, error } = useListarListas();
   const [listas, setListas] = useState<ListaResponse[]>([]);
@@ -27,7 +37,7 @@ export default function Home() {
     if (Array.isArray(data)) {
       setListas(data);
     } else if (isError) {
-      console.error("Erro ao listar listas:", error);
+      handleError(error);
     }
   }, [data, isError]);
 
@@ -37,7 +47,7 @@ export default function Home() {
       const novasListas = await listarListas();
       setListas(novasListas);
     } catch (err) {
-      console.error("Erro no refresh:", err);
+      handleError(err);
     } finally {
       setRefreshing(false);
     }
@@ -45,7 +55,7 @@ export default function Home() {
 
   return (
     <>
-      <ToastManager />
+      {/* <ToastManager /> */}
 
       {isPending && !refreshing ? (
         <ActivityIndicator size="large" color={COLORS.verde_principal} />
