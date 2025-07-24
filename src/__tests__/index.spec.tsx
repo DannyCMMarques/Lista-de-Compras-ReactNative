@@ -32,11 +32,18 @@ jest.mock('@/src/components/botao-flutuante', () => ({
   default: jest.fn(() => null),
 }));
 
-jest.mock('toastify-react-native/components/ToastManager', () => ({
-  __esModule: true,
-  default: jest.fn(() => null),
+jest.mock('toastify-react-native', () => ({
+  Toast: {
+    success: jest.fn(),
+    error: jest.fn(),
+    info: jest.fn(),
+  },
+  ToastManager: {
+    success: jest.fn(),
+    error: jest.fn(),
+    info: jest.fn(),
+  },
 }));
-
 
 const useListarListasMock = useListarListas as jest.Mock;
 const listarListasMock = listarListas as jest.Mock;
@@ -94,7 +101,7 @@ describe('Home screen', () => {
       RefreshControlProps
     >;
 
-    refreshControl.props.onRefresh?.(); 
+    refreshControl.props.onRefresh?.();
 
     await waitFor(() => expect(listarListasMock).toHaveBeenCalledTimes(1));
   });

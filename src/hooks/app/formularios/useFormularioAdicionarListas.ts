@@ -17,7 +17,7 @@ export function useFormularioAdicionarLista(): useFormularioAdicionarListaReturn
 
   const [iconeSelecionado, setIconeSelecionado] = useState("shopping-cart");
 
-  const handleSucess = useHandleSucess(" Lista criada com sucesso!");
+  const handleSucess = useHandleSucess("Lista criada com sucesso!");
 
   const { handleError } = useErrorHandler();
 
