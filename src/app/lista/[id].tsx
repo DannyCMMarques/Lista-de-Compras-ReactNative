@@ -6,7 +6,6 @@ import { COLORS } from "@/src/utils/constants/Colors";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
-import ToastManager from "toastify-react-native/components/ToastManager";
 
 export default function VisualizarLista() {
   const router = useRouter();

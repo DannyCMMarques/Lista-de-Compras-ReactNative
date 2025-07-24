@@ -55,7 +55,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <ToastManager /> */}
 
       {isPending && !refreshing ? (
         <ActivityIndicator size="large" color={COLORS.verde_principal} />
