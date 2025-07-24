@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         gap: 12, 
         marginBottom: 6,
+        marginVertical: 8 ,
+
     },
 });
 
