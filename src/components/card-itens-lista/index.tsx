@@ -4,7 +4,7 @@ import { useToggleItens } from "@/src/hooks/useToggleItens";
 import { COLORS } from "@/src/utils/constants/Colors";
 import { buildItensComStatus } from "@/src/utils/helpers/lista";
 import { CardItensListaProps } from "@/src/utils/types/components/componentsTypes";
-import React from "react";
+import React, { useCallback } from "react";
 import { FlatList, RefreshControl, Text, View } from "react-native";
 import { BarraDePorcentagem } from "../barra-de-porcentagem";
 import { styles } from "./styles";
@@ -16,28 +16,32 @@ export default function CardItensLista({
   refreshing,
   onRefresh,
 }: CardItensListaProps) {
+
   const categorias = useCategorias(itensAgrupados);
+
   const showProgressBar = categorias.length > 0;
+
 const excluirItem = useDeletarItem(listaId);
+
   const { itensSelecionados, toggleSelecionado } = useToggleItens(listaId);
  
-  const handleDelete = (id:string) => {
+  const handleDelete = useCallback((id:string) => {
     excluirItem.mutate(id);
-  };
+  },[excluirItem]);
 
   const todosItensComStatus = React.useMemo(
     () => buildItensComStatus(categorias, itensSelecionados),
     [categorias, itensSelecionados]
   );
 
-  const renderCategoria = ({ item }: any) => (
+  const renderCategoria = useCallback( ({ item }: any) => (
     <CategoriasUI
       item={item}
       toggleSelecionado={toggleSelecionado}
       itensSelecionados={itensSelecionados}
       handleDelete={handleDelete}
     />
-  );
+  ),[handleDelete,itensSelecionados,toggleSelecionado]);
 
   return (
       <FlatList

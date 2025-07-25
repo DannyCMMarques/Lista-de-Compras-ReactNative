@@ -1,33 +1,14 @@
 import BotaoFlutuante from "@/src/components/botao-flutuante";
 import CardItensLista from "@/src/components/card-itens-lista";
 import Modal from "@/src/components/modal";
-import { useBuscarListaPorId } from "@/src/hooks/useListas";
+import { useVisualizarLista } from "@/src/hooks/app/useVisualizarLista";
 import { COLORS } from "@/src/utils/constants/Colors";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useCallback, useState } from "react";
+import { useRouter } from "expo-router";
 import { ActivityIndicator, View } from "react-native";
 
 export default function VisualizarLista() {
   const router = useRouter();
-  const { id } = useLocalSearchParams<{ id: string }>();
-  const {
-    data: lista,
-    isPending,
-    refetch,
-  } = useBuscarListaPorId(id);
-
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    try {
-      await refetch();
-    } finally {
-      setRefreshing(false);
-    }
-  }, [refetch]);
-
-
+  const { lista, isPending, refreshing, onRefresh, listaId } = useVisualizarLista();
   return (
     <>
       <Modal title="Lista de Compras">
@@ -37,7 +18,7 @@ export default function VisualizarLista() {
           <View style={{ marginTop: 30 }}>
 
             <CardItensLista
-              listaId={id}
+              listaId={listaId}
               itensAgrupados={lista?.itensAgrupados}
               refreshing={refreshing}
               onRefresh={onRefresh}
@@ -47,7 +28,7 @@ export default function VisualizarLista() {
       </Modal>
 
       <BotaoFlutuante
-        onPress={() => router.push(`/adicionar-itens?id=${id}`)}
+        onPress={() => router.push(`/adicionar-itens?id=${listaId}`)}
       />
     </>
   );

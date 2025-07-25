@@ -5,71 +5,26 @@ import SelectField from "@/src/components/select-field";
 import Seletor from "@/src/components/seletor";
 import TituloComIcone from "@/src/components/tituloIcone";
 import { useHandleVoltar } from "@/src/hooks/useHandleVoltar";
-import { useAdicionarItem } from "@/src/hooks/useItensLista";
 import { stylesCentral } from "@/src/styles/stylesCentral";
 import { CATEGORIA_PRODUTOS } from "@/src/utils/content/categoriasProdutos";
 import { unidadeOptions } from "@/src/utils/content/unidadeOptions";
-import { ItensListaRequest } from "@/src/utils/types/interfaces/ItemListaInterface";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { View } from "react-native";
-import { Toast } from "toastify-react-native";
-import * as z from "zod/v4";
 import { styles } from "./styles";
-import { useErrorHandler } from "@/src/hooks/useHandleError";
+import { useFormularioAdicionarItens } from "@/src/hooks/app/formularios/useFormularioAdicionarItens";
 
-const schema = z.object({
-  nome: z.string().min(1, { message: "O nome é obrigatório" }),
-  quantidade: z.number().min(1, { message: "A quantidade é obrigatória" }),
-  unidade: z.string().min(1, { message: "A unidade é obrigatória" }),
-});
 
 export default function FormularioItens() {
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState("outros");
-
-  const { id } = useLocalSearchParams<{ id: string }>();
-
-  const criarItensMutation = useAdicionarItem(id);
+  const {
+    onSubmit,
+    control,
+    handleSubmit,
+    setCategoriaSelecionada,
+    errors,
+    categoriaSelecionada,
+  } = useFormularioAdicionarItens()
 
   const handleVoltar = useHandleVoltar();
 
-  const {handleError} = useErrorHandler();
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
-    mode: "onSubmit",
-    defaultValues: {
-      nome: "",
-      quantidade: 1,
-      unidade: "unidade",
-    },
-  });
-  
-  type FormularioListaData = z.infer<typeof schema>;
-
-  const onSubmit = (data: FormularioListaData) => {
-    const payload: ItensListaRequest = {
-      ...data,
-      categoria: categoriaSelecionada,
-    };
-    try {
-      criarItensMutation.mutate(payload);
-      handleSucess();
-    } catch (error) {
-      handleError(error);
-    }
-  };
-
-  const handleSucess = () => {
-    Toast.success("Item criado com sucesso!");
-    handleVoltar();
-  };
   return (
     <Modal title="Adicionar itens">
       <View
@@ -90,7 +45,6 @@ export default function FormularioItens() {
         style={[
           stylesCentral.miniContainer,
           styles.divInputOptions,
-          { marginVertical: 8 },
         ]}
       >
         <View style={{ flex: 1 }}>
