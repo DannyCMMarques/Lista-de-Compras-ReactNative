@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { listarListas } from "@/src/service/listasService";
 import { ListaResponse } from "@/src/utils/types/interfaces/listasInterface";
 import { useErrorHandler } from "../useHandleError";
-import { useListarListas } from "../useListas";
+import { useListarListas } from "../listas/useListarListas";
 
 export function useHomeListas() {
   const { data, isPending, isError, error } = useListarListas();

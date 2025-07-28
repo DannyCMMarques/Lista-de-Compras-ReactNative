@@ -1,13 +1,13 @@
 import { useFormularioAdicionarListaReturn } from "@/src/utils/types/interfaces/useFormularioAdicionarListaReturn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useCriarLista } from "../../useListas";
 import { useCallback, useState } from "react";
 import { CORES_LISTA } from "@/src/utils/content/coresListas";
 import { useHandleSucess } from "../../useHandleSucess";
 import { useErrorHandler } from "../../useHandleError";
 import { FormularioListaData, schemaListas } from "@/src/utils/schemas/schemasListas";
 import { ListaRequest } from "@/src/utils/types/interfaces/listasInterface";
+import { useCriarLista } from "../../listas/useCriarLista";
 
 
 export function useFormularioAdicionarLista(): useFormularioAdicionarListaReturn {

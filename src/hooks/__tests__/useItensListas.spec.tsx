@@ -1,13 +1,19 @@
-import React from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { renderHook, act, waitFor } from "@testing-library/react-native";
-
 import {
-  useAdicionarItem,
-  useListarItens,
-  useDeletarItem,
-  useAtualizarStatusItem,
-} from "@/src/hooks/useItensLista";
+  adicionarItemNaLista,
+  atualizarStatusItem,
+  deletarItemDaLista,
+  listarItensDaLista,
+} from "@/src/service/itensListasService";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { act, renderHook, waitFor } from "@testing-library/react-native";
+import React from "react";
+
+import { itemMock1, itemMock2 } from "@/src/utils/mocks/itensMock";
+import { useAdicionarItem } from "../itensLista/useAdicionarItem";
+import { useListarItens } from "../itensLista/useListarItens";
+import { useDeletarItem } from "../itensLista/useDeletarItem";
+import { useAtualizarStatusItem } from "../itensLista/useAtualizarStatusItem";
 
 import { QUERY_KEYS } from "@/src/utils/constants/queryKeys";
 
@@ -17,15 +23,6 @@ jest.mock("@/src/service/itensListasService", () => ({
   deletarItemDaLista: jest.fn(),
   atualizarStatusItem: jest.fn(),
 }));
-
-import {
-  adicionarItemNaLista,
-  listarItensDaLista,
-  deletarItemDaLista,
-  atualizarStatusItem,
-} from "@/src/service/itensListasService";
-
-import { itemMock1, itemMock2 } from "@/src/utils/mocks/itensMock";
 
 const mockAdicionarItemNaLista = adicionarItemNaLista as jest.MockedFunction<
   typeof adicionarItemNaLista
@@ -64,7 +61,7 @@ describe("Hooks de Itens da Lista (React Native)", () => {
     mockAdicionarItemNaLista.mockResolvedValueOnce(undefined);
 
     await act(async () =>
-      result.current.mutateAsync({
+      result.current.adicionarItem({
         nome: "Uva",
         quantidade: 1,
         categoria: "frutas",
@@ -95,8 +92,9 @@ describe("Hooks de Itens da Lista (React Native)", () => {
     });
 
     await waitFor(() =>
-      expect(result.current.data).toEqual([itemMock1, itemMock2])
+      expect(result.current.itens).toEqual([itemMock1, itemMock2])
     );
+
     expect(mockListarItensDaLista).toHaveBeenCalledWith("l1");
   });
 
@@ -108,7 +106,7 @@ describe("Hooks de Itens da Lista (React Native)", () => {
 
     mockDeletarItemDaLista.mockResolvedValueOnce(undefined);
 
-    await act(async () => result.current.mutateAsync("i99"));
+    await act(async () => result.current.deletarItem("i99"));
 
     await waitFor(() =>
       expect(
@@ -131,7 +129,10 @@ describe("Hooks de Itens da Lista (React Native)", () => {
     mockAtualizarStatusItem.mockResolvedValueOnce(undefined);
 
     await act(async () =>
-      result.current.mutateAsync({ idItem: "i42", comprado: true })
+      result.current.atualizarStatusItem({
+        idItem: "i42",
+        comprado: true,
+      })
     );
 
     await waitFor(() =>

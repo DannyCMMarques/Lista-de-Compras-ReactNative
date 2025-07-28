@@ -1,16 +1,17 @@
 import { act, renderHook } from '@testing-library/react-native';
 
 import { useToggleItens } from '@/src/hooks/useToggleItens';
+import { useAtualizarStatusItem } from '../itensLista/useAtualizarStatusItem';
 
-import { useAtualizarStatusItem } from '@/src/hooks/useItensLista';
 
-jest.mock('@/src/hooks/useItensLista', () => ({
+jest.mock('../itensLista/useAtualizarStatusItem', () => ({
   useAtualizarStatusItem: jest.fn(),
 }));
 
 const mockMutate = jest.fn();
-(useAtualizarStatusItem as jest.Mock).mockReturnValue({ mutate: mockMutate });
-
+(useAtualizarStatusItem as jest.Mock).mockReturnValue({
+  atualizarStatusItem: mockMutate,
+});
 describe('useToggleItens', () => {
   beforeEach(() => {
     jest.clearAllMocks();

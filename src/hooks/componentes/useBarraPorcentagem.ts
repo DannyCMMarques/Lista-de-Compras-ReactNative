@@ -3,6 +3,8 @@ import { COLORS } from "@/src/utils/constants/Colors";
 import { BarraDePorcentagemProps } from "@/src/utils/types/components/componentsTypes";
 
 export function useBarraDePorcentagem({ itens }: BarraDePorcentagemProps) {
+
+   
   const {
     porcentagem,
     cor,

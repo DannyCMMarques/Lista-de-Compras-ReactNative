@@ -1,18 +1,15 @@
-import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
-
-import { Toast } from 'toastify-react-native';
-import { useAdicionarItem } from '@/src/hooks/useItensLista';
-import { useHandleVoltar } from '@/src/hooks/useHandleVoltar';
+import React from 'react';
 import FormularioItens from '@/src/app/adicionar-itens/index';
-
-
+import { useHandleVoltar } from '@/src/hooks/useHandleVoltar';
+import { Toast } from 'toastify-react-native';
+import { useAdicionarItem } from '../hooks/itensLista/useAdicionarItem';
 
 jest.mock('expo-router', () => ({
   useLocalSearchParams: () => ({ id: 'lista-1' }),
 }));
 
-jest.mock('@/src/hooks/useItensLista', () => ({
+jest.mock('../hooks/itensLista/useAdicionarItem', () => ({
   useAdicionarItem: jest.fn(),
 }));
 
@@ -76,23 +73,29 @@ jest.mock('@/src/components/botao', () => {
 });
 
 jest.mock('toastify-react-native', () => ({
-  Toast: { success: jest.fn() },
+  Toast: {
+    success: jest.fn(),
+    error: jest.fn(),
+  },
 }));
 jest.mock('toastify-react-native/components/ToastManager', () => ({
   __esModule: true,
   default: () => null,
 }));
 
-const mutateMock = jest.fn();
-(useAdicionarItem as jest.Mock).mockReturnValue({ mutate: mutateMock });
 
 const voltarMock = jest.fn();
 (useHandleVoltar as jest.Mock).mockReturnValue(voltarMock);
 
+const mutateMock = jest.fn();
+
+(useAdicionarItem as jest.Mock).mockReturnValue({
+  adicionarItem: mutateMock,
+});
+
 afterEach(() => {
   jest.clearAllMocks();
 });
-
 
 describe('FormularioItens', () => {
   it('envia dados válidos, mostra toast e volta', async () => {
@@ -107,6 +110,7 @@ describe('FormularioItens', () => {
         unidade: 'unidade',
         categoria: 'outros',
       });
+
       expect(Toast.success).toHaveBeenCalledWith('Item criado com sucesso!');
       expect(voltarMock).toHaveBeenCalled();
     });

@@ -13,14 +13,13 @@ import {
   mockListaAgrupadaPorCategoria,
 } from "@/src/utils/mocks/listasMock";
 
-import {
-  useCriarLista,
-  useListarListas,
-  useDeletarLista,
-  useBuscarListaPorId,
-} from "@/src/hooks/useListas"; 
+ 
 
 import { QUERY_KEYS } from "@/src/utils/constants/queryKeys";
+import { useCriarLista } from "../listas/useCriarLista";
+import { useListarListas } from "../listas/useListarListas";
+import { useBuscarListaPorId } from "../listas/useBuscarListasPorId";
+import { useDeletarLista } from "../listas/useDeletarLista";
 
 jest.mock("@/src/service/listasService", () => ({
   criarLista: jest.fn(),
@@ -100,7 +99,7 @@ describe("Hooks de Listas (React Native)", () => {
 
     mockDeletarLista.mockResolvedValueOnce(undefined);
 
-    await act(async () => result.current.mutateAsync("lista-1"));
+await act(async () => result.current.deletarLista("lista-1"));
 
     await waitFor(() =>
       expect(queryClient.isFetching({ queryKey: QUERY_KEYS.LISTAS })).toBe(0)

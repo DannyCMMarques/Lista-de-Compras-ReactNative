@@ -2,12 +2,12 @@ import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import { CORES_LISTA } from '@/src/utils/content/coresListas';
 import { Toast } from 'toastify-react-native';
-import { useCriarLista } from '@/src/hooks/useListas';
 import { useHandleVoltar } from '@/src/hooks/useHandleVoltar';
 import FormularioListas from '@/src/app/adicionar-listas/index';
+import { useCriarLista } from '../hooks/listas/useCriarLista';
 
 
-jest.mock('@/src/hooks/useListas', () => ({
+jest.mock('../hooks/listas/useCriarLista', () => ({
     useCriarLista: jest.fn(),
 }));
 
