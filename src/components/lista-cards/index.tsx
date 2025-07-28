@@ -5,17 +5,17 @@ import { BarraDePorcentagem } from "../barra-de-porcentagem";
 import TituloComIcone from "../tituloIcone";
 
 import { useContadorDeTempo } from "@/src/hooks/useContadorDeTempo";
-import { useDeletarLista } from "@/src/hooks/useListas";
 import { useShareListaCompleta } from "@/src/hooks/useShareListaCompleta";
 import { stylesCentral } from "@/src/styles/stylesCentral";
 import { ListaCardsProps } from "@/src/utils/types/components/componentsTypes";
+import { useDeletarLista } from "@/src/hooks/listas/useDeletarLista";
 
 export function ListaCards({ lista }: ListaCardsProps) {
   const router = useRouter();
   const tempoFormatado = useContadorDeTempo(lista.createdAt);
   const totalItens = lista.itensDaLista.length;
 
-  const excluirLista = useDeletarLista();
+const { deletarLista } = useDeletarLista();
   const shareCompleta = useShareListaCompleta(lista);
 
   const subtitulo = `${totalItens} ${totalItens === 1 ? "item" : "itens"
@@ -29,7 +29,7 @@ export function ListaCards({ lista }: ListaCardsProps) {
   };
 
   const handleDelete = () => {
-    excluirLista.mutate(lista.id);
+    deletarLista(lista.id);
   };
 
   return (

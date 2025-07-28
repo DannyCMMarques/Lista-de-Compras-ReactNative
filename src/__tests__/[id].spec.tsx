@@ -2,16 +2,16 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react-native';
 import { ActivityIndicator } from 'react-native';
 
-import { useBuscarListaPorId } from '@/src/hooks/useListas';
 import { mockListaAgrupadaPorCategoria } from '@/src/utils/mocks/listasMock';
 import VisualizarLista from '@/src/app/lista/[id]';
+import { useBuscarListaPorId } from '../hooks/listas/useBuscarListasPorId';
 
 jest.mock('expo-router', () => ({
   useRouter: () => ({ push: jest.fn() }),
   useLocalSearchParams: () => ({ id: 'lista-1' }),
 }));
 
-jest.mock('@/src/hooks/useListas', () => ({
+jest.mock('../hooks/listas/useBuscarListasPorId', () => ({
   useBuscarListaPorId: jest.fn(),
 }));
 

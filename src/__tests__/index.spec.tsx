@@ -5,16 +5,16 @@ import {
   FlatList,
   RefreshControlProps,
 } from 'react-native';
-import { useListarListas } from '@/src/hooks/useListas';
 import { listarListas } from '@/src/service/listasService';
 import { mockListas } from '@/src/utils/mocks/listasMock';
 import Home from '../app';
+import { useListarListas } from '../hooks/listas/useListarListas';
 
 jest.mock('expo-router', () => ({
   useRouter: () => ({ push: jest.fn() }),
 }));
 
-jest.mock('@/src/hooks/useListas', () => ({
+jest.mock('../hooks/listas/useListarListas', () => ({
   useListarListas: jest.fn(),
 }));
 

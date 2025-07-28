@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useLocalSearchParams } from "expo-router";
-import { useBuscarListaPorId } from "../useListas";
+import { useBuscarListaPorId } from "../listas/useBuscarListasPorId";
 
 export function useVisualizarLista() {
   const { id } = useLocalSearchParams<{ id: string }>();

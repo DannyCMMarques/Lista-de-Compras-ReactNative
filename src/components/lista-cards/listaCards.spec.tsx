@@ -14,11 +14,11 @@ jest.mock('@/src/hooks/useContadorDeTempo', () => ({
     useContadorDeTempo: () => 'Hoje',
 }))
 
-const mockMutate = jest.fn()
-jest.mock('@/src/hooks/useListas', () => ({
-    useDeletarLista: () => ({ mutate: mockMutate }),
-}))
+const mockMutate = jest.fn();
 
+jest.mock("@/src/hooks/listas/useDeletarLista", () => ({
+  useDeletarLista: () => ({ deletarLista: mockMutate }), 
+}));
 jest.mock('@/src/hooks/useShareListaCompleta', () => ({
     useShareListaCompleta: () => jest.fn(),
 }))
