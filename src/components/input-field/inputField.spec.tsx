@@ -1,7 +1,7 @@
+import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { FieldError, useForm } from 'react-hook-form';
 import { Text } from 'react-native';
-import { useForm, FieldError } from 'react-hook-form';
 import InputField from '.';
 
 
@@ -74,6 +74,6 @@ describe('InputField', () => {
       <FormWrapper keyboardType="numeric" />
     );
     const input = getByPlaceholderText(placeholder);
-    expect((input as any).props.keyboardType).toBe('numeric');
+    expect((input).props.keyboardType).toBe('numeric');
   });
 });

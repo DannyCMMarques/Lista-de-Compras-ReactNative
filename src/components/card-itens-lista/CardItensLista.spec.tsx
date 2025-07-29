@@ -4,6 +4,7 @@ import { fireEvent, render } from "@testing-library/react-native";
 import React from "react";
 import { RefreshControl } from "react-native";
 import CardItensLista from ".";
+import { ItensListaResponse } from "@/src/utils/types/interfaces/ItemListaInterface";
 
 const mockUseCategorias = require("@/src/hooks/useCategorias")
   .useCategorias as jest.Mock;
@@ -39,21 +40,37 @@ jest.mock("../render-categoria", () => ({
 
 describe("CardItensLista", () => {
   const listaId = "lista-123";
-  const itensAgrupados = [{ id: "i1" }, { id: "i2" }] as any;
-  const onRefreshMock = jest.fn();
+const itensAgrupados: Record<string, ItensListaResponse[]> = {
+  grupo1: [
+    { id: "i1", nome: "", quantidade: 0, comprado: false, createdAt: new Date() },
+    { id: "i2", nome: "", quantidade: 0, comprado: false, createdAt: new Date() },
+  ],
+};  const onRefreshMock = jest.fn();
   const mockMutate = jest.fn();
   const toggleSelecionado = jest.fn();
   const itensSelecionados = ["i1"];
-  const categoriasStub = [
-    { key: "c1", title: "Cat 1" },
-    { key: "c2", title: "Cat 2" },
-  ] as any;
+const categoriasStub: CategoriaRenderData[] = [
+  {
+    key: "c1",
+    label: "Cat 1",
+    icon: "home", 
+    cor: "#fff",
+    itens: [],
+  },
+  {
+    key: "c2",
+    label: "Cat 2",
+    icon: "list",
+    cor: "#000",
+    itens: [],
+  },
+];
   const statusStub = [{ key: "c1", percentual: 50 }];
 
   beforeEach(() => {
     jest.clearAllMocks();
     mockUseCategorias.mockReturnValue(categoriasStub);
-    mockUseDeletarItem.mockReturnValue({ deletarItem: mockMutate } as any);
+    mockUseDeletarItem.mockReturnValue({ deletarItem: mockMutate } );
     mockUseToggleItens.mockReturnValue({
       itensSelecionados,
       toggleSelecionado,

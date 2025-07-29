@@ -4,6 +4,8 @@ import FormularioItens from '@/src/app/adicionar-itens/index';
 import { useHandleVoltar } from '@/src/hooks/useHandleVoltar';
 import { Toast } from 'toastify-react-native';
 import { useAdicionarItem } from '../hooks/itensLista/useAdicionarItem';
+import { ListaRequest } from '../utils/types/interfaces/listasInterface';
+import { ItensListaRequest } from '../utils/types/interfaces/ItemListaInterface';
 
 jest.mock('expo-router', () => ({
   useLocalSearchParams: () => ({ id: 'lista-1' }),
@@ -25,9 +27,9 @@ jest.mock('react-hook-form', () => {
       control: {},
       formState: { errors: {} },
       handleSubmit:
-        (cb: (data: any) => void) =>
+        (onSubmit: (data: ItensListaRequest ) => void) =>
           () =>
-            cb({ nome: 'Maçã', quantidade: 1, unidade: 'unidade' }),
+            onSubmit({ nome: 'Maçã', quantidade: 1, unidade: 'unidade' }),
     }),
   };
 });

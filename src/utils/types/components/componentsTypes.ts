@@ -100,3 +100,10 @@ export interface CategoriaRenderData {
   icon: keyof typeof MaterialIcons.glyphMap;
   cor: string;
 }
+
+export type IconProps = {
+  name: string;
+  size?: number;
+  color?: string;
+};
+

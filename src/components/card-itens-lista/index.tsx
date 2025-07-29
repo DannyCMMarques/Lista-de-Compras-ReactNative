@@ -2,9 +2,9 @@ import { useCategorias } from "@/src/hooks/useCategorias";
 import { useToggleItens } from "@/src/hooks/useToggleItens";
 import { COLORS } from "@/src/utils/constants/Colors";
 import { buildItensComStatus } from "@/src/utils/helpers/lista";
-import { CardItensListaProps } from "@/src/utils/types/components/componentsTypes";
+import { CardItensListaProps, CategoriaRenderData } from "@/src/utils/types/components/componentsTypes";
 import React, { useCallback } from "react";
-import { FlatList, RefreshControl, Text, View } from "react-native";
+import { FlatList, ListRenderItemInfo, RefreshControl, Text, View } from "react-native";
 import { BarraDePorcentagem } from "../barra-de-porcentagem";
 import { styles } from "./styles";
 import { CategoriasUI } from "../render-categoria";
@@ -34,7 +34,7 @@ export default function CardItensLista({
     [categorias, itensSelecionados]
   );
 
-  const renderCategoria = useCallback(({ item }: any) => (
+  const renderCategoria = useCallback(({ item }:ListRenderItemInfo<CategoriaRenderData>) => (
     <CategoriasUI
       item={item}
       toggleSelecionado={toggleSelecionado}
