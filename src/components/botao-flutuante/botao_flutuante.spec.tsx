@@ -3,11 +3,12 @@ import { render, fireEvent } from '@testing-library/react-native';
 import { TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BotaoFlutuante from '.';
+import { BotaoFlutuanteProps, IconProps } from '@/src/utils/types/components/componentsTypes';
 
 jest.mock('@expo/vector-icons', () => {
   const React = require('react');
   return {
-    MaterialIcons: (props: any) => <React.Fragment>{props.name}</React.Fragment>,
+    MaterialIcons: (props: IconProps) => <React.Fragment>{props.name}</React.Fragment>,
   };
 });
 
@@ -25,7 +26,7 @@ describe('BotaoFlutuante', () => {
     jest.clearAllMocks();
   });
 
-  function flattenStyle(styleProp: any) {
+  function flattenStyle(styleProp: BotaoFlutuanteProps) {
     return Array.isArray(styleProp)
       ? Object.assign({}, ...styleProp)
       : styleProp;

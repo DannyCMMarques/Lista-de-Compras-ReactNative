@@ -5,6 +5,7 @@ import { Toast } from 'toastify-react-native';
 import { useHandleVoltar } from '@/src/hooks/useHandleVoltar';
 import FormularioListas from '@/src/app/adicionar-listas/index';
 import { useCriarLista } from '../hooks/listas/useCriarLista';
+import { ListaRequest } from '../utils/types/interfaces/listasInterface';
 
 
 jest.mock('../hooks/listas/useCriarLista', () => ({
@@ -23,9 +24,10 @@ jest.mock('react-hook-form', () => {
             control: {},
             formState: { errors: {} },
             handleSubmit:
-                (cb: (data: any) => void) =>
+                (cb: (data:ListaRequest) => void) =>
                     () =>
-                        cb({ titulo: 'Minha lista' }),
+                        cb({ titulo: 'Minha lista', corEscolhida: "#10b981",iconeEscolhido:"cart",
+ }),
         }),
     };
 });
